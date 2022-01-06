@@ -6,9 +6,19 @@
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
+    "start": "NODE_ENV=production node dist/server/bin/server.js",
+    "build": "NODE_ENV=production babel server --out-dir dist/server --source-maps inline",
+    "deploy": "git push heroku master",
     "lint": "eslint ."
   },
+  "dependencies": {
+    "fastify": "^3.25.3"
+  },
   "devDependencies": {
-    "eslint": "^8.6.0"
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "eslint": "^8.6.0",
+    "nodemon": "^2.0.15"
   }
 }
