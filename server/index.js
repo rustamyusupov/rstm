@@ -1,10 +1,17 @@
-import fastify from 'fastify';
+import Express from 'express';
+import path from 'path';
 
 import routes from './routes';
 
-export default () => {
-  const app = fastify({});
+const views = app => {
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'pug');
+};
 
+export default () => {
+  const app = new Express();
+
+  views(app);
   routes(app);
 
   return app;

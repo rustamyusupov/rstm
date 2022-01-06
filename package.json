@@ -13,7 +13,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "fastify": "^3.25.3"
+    "express": "^4.17.2",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
