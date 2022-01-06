@@ -1,0 +1,14 @@
+{
+  "name": "rstm",
+  "version": "1.0.0",
+  "description": "Personal stuff about me",
+  "license": "MIT",
+  "private": true,
+  "author": "Rustam Yuspov",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0"
+  }
+}
