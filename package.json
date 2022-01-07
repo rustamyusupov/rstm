@@ -7,16 +7,16 @@
   "author": "Rustam Yuspov",
   "scripts": {
     "prebuild": "rm -Rf dist/",
-    "start:client": "parcel ./src/*.html",
-    "start:server": "nodemon --exec babel-node src/server.js",
+    "dev": "nodemon --exec babel-node src/server.js",
+    "start": "node src/server.js",
     "build": "parcel build --target server && parcel build --target client",
     "lint": "eslint ."
   },
   "targets": {
     "client": {
       "source": [
-        "src/index.html",
-        "src/wishes.html"
+        "./src/index.html",
+        "./src/wishes.html"
       ],
       "distDir": "./dist",
       "engines": {
@@ -26,7 +26,7 @@
       "includeNodeModules": true
     },
     "server": {
-      "source": "src/server.js",
+      "source": "./src/server.js",
       "distDir": "./dist",
       "engines": {
         "node": ">= 17"
