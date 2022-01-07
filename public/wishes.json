@@ -1,0 +1,253 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "Devices"
+    },
+    {
+      "id": 1,
+      "name": "Equipment"
+    },
+    {
+      "id": 2,
+      "name": "Clothes"
+    }
+  ],
+  "items": [
+    {
+      "categoryId": 0,
+      "name": "Garmin HRM-DUAL",
+      "link": "https://www.bikeinn.com/велосипед/garmin-hrm-dual-Частота-сердцебиения-sensor/137082134/p",
+      "price": 3781.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 0,
+      "name": "4iiii Precision SH 7000 Left Crank Power Meter",
+      "link": "https://www.bikeinn.com/bike/4iiii-precision-sh-7000-left-crank-power-meter/137530674/p",
+      "price": 19287.49,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 0,
+      "name": "Sony’s WH-1000XM4",
+      "link": "https://www.sony.com/electronics/headband-headphones/wh-1000xm4",
+      "price": 350,
+      "currency": "USD",
+      "status": "active"
+    },
+    {
+      "categoryId": 0,
+      "name": "Canyon Ultimate CF SL 7, Size: S",
+      "link": "https://www.canyon.com/en-de/road-bikes/race-bikes/ultimate/cf-sl/ultimate-cf-sl-7/2751.html?dwvar_2751_pv_rahmenfarbe=BK%2FBK",
+      "price": 1699,
+      "currency": "eur",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Elite Direto-X OTS",
+      "link": "https://www.wiggle.com/elite-direto-x-ots?sku=103286698&curr=USD&dest=24&prevDestCountryId=24",
+      "price": 649.11,
+      "currency": "USD",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Garmin Edge 530",
+      "link": "https://www.bikeinn.com/велосипед/garmin-edge-530-Езда-на-велосипеде-Компьютер/137180529/p",
+      "price": 15234.99,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Fizik Tempo Powerstrap R5 Road Shoe",
+      "link": "https://www.bike24.com/p2396932.html",
+      "price": 67.22,
+      "currency": "EUR",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Magene S3+ Speed Cadence Sensor",
+      "link": "https://aliexpress.ru/item/4001008082955.html?item_id=4001008082955&sku_id=12000016135940809",
+      "price": 34.79,
+      "currency": "USD",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Lezyne Femto USB Drive Rear Light",
+      "link": "https://www.bikeinn.com/велосипед/lezyne-femto-usb-drive-rear-light/137290122/p",
+      "price": 1186.99,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Shimano M520 SPD Pedals",
+      "link": "https://mountainpeaks.ru/bike_shop/velozapchasti/pedali_shimano_kontaktnye_spd_pd_m520",
+      "price": 4115,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 0,
+      "name": "Shimano 105 Carbon PD-R7000 Clipless Pedals",
+      "link": "https://aliexpress.ru/item/1005002685079425.html?item_id=1005002685079425&sku_id=12000021711102230",
+      "price": 4502.23,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 1,
+      "name": "Oakley Sutro Lite Prizm Road Sunglasses",
+      "link": "https://www.snowinn.com/ski-store/oakley-sutro-lite-prizm-road-sunglasses/137804939/p",
+      "price": 8384.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "POC Omne Air SPIN Road Helmet, Size: M",
+      "link": "https://www.bikeinn.com/bike/poc-omne-air-spin-road-helmet/136992662/p",
+      "price": 11988.49,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "B&W Bike Box II Transport Case",
+      "link": "https://www.bike-components.de/en/B-W/Bike-Box-II-Transport-Case-p66212",
+      "price": 306.72,
+      "currency": "EUR",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Elite Fly Tour De France 550ml Water Bottle",
+      "link": "https://www.bikeinn.com/велосипед/elite-fly-tour-de-france-550ml-water-bottle/138079611/p",
+      "price": 368.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Elite Fly Giro Italia 550ml Water Bottle",
+      "link": "https://www.bikeinn.com/велосипед/elite-fly-giro-italia-550ml-water-bottle/138079613/p",
+      "price": 338.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Elite Fly Team INEOS-Grenadiers 550ml Water Bottle",
+      "link": "https://www.bikeinn.com/велосипед/elite-fly-team-ineos-grenadiers-550ml-water-bottle/138048394/p",
+      "price": 342.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Freeletics Jump rope",
+      "link": "https://shop.freeletics.com/collections/jump-rope/products/freeletics-jump-rope",
+      "price": 24.99,
+      "currency": "EUR",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Freeletics Pullup bar",
+      "link": "https://shop.freeletics.com/products/no-excuses-bar",
+      "price": 44.99,
+      "currency": "EUR",
+      "status": "active",
+      "visibility": "hidden"
+    },
+    {
+      "categoryId": 1,
+      "name": "Fizik Tempo Microtex Bondcush Soft 3 mm Handlebar Tape",
+      "link": "https://www.chainreactioncycles.com/ru/en/fizik-tempo-m-tx-soft-bar-tape/rp-prod181664",
+      "price": 1641.99,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 1,
+      "name": "Elite Vico Carbon Bottle Cage, Count: 2 pcs",
+      "link": "https://www.bikeinn.com/bike/elite-vico-carbon-bottle-cage/137417303/p",
+      "price": 1347.99,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 1,
+      "name": "Elite Fly 550ml Water Bottle, Count: 2 pcs",
+      "link": "https://www.bikeinn.com/bike/elite-fly-550ml-water-bottle/137515637/p",
+      "price": 275.99,
+      "currency": "RUB",
+      "status": "presented",
+      "visibility": "archive"
+    },
+    {
+      "categoryId": 2,
+      "name": "Nike Air Force 1 '07, Size: 8.5 US",
+      "link": "https://www.nike.com/t/air-force-1-07-mens-shoes-5QFp5Z/CW2288-001",
+      "price": 90,
+      "currency": "USD",
+      "status": "active"
+    },
+    {
+      "categoryId": 2,
+      "name": "Veter Base Layer, Size: M",
+      "link": "https://veter.cc/store?store-page=МУЖСКОЙ-БАЗОВЫЙ-СЛОЙ-2021-p389430742",
+      "price": 1990,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 2,
+      "name": "Veter Jersey, Size: M",
+      "link": "https://veter.cc/store?store-page=МУЖСКАЯ-КЛАССИЧЕСКАЯ-ДЖЕРСИ-2021-p377016925",
+      "price": 4990,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 2,
+      "name": "Veter Warm Jersey, Size: M",
+      "link": "https://veter.cc/store?store-page=МУЖСКАЯ-ТЁПЛАЯ-ДЖЕРСИ-2021-p351359521",
+      "price": 6490,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 2,
+      "name": "Veter Bibs, Size: M",
+      "link": "https://veter.cc/store?store-page=МУЖСКИЕ-ВЕЛОТРУСЫ-2021-p297691447",
+      "price": 4990,
+      "currency": "RUB",
+      "status": "active"
+    },
+    {
+      "categoryId": 2,
+      "name": "Castelli Giro d'Italia 2021 nero 010",
+      "link": "https://www.bikeinn.com/bike/castelli-giro-italia-2021-cap/137086155/p",
+      "price": 856.99,
+      "currency": "RUB",
+      "status": "active"
+    }
+  ]
+}

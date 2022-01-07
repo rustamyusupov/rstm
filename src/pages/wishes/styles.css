@@ -1,0 +1,37 @@
+.wishes {
+  padding: 10px;
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category-title {
+  margin-bottom: 10px;
+}
+
+.wish {
+  position: relative;
+  padding-left: 20px;
+  max-width: 70ch;
+}
+
+.wish:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.wish-icon {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+}
+
+.active {
+  color: var(--color-link);
+}
+
+.presented {
+  color: var(--color-black);
+  text-decoration: line-through;
+}
