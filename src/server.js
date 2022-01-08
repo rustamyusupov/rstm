@@ -1,28 +1,17 @@
 const express = require('express');
+const jsonServer = require('json-server');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-const wishes = require('../public/wishes.json');
 
 const port = process.env.PORT || 8000;
 
 const server = () => {
   const app = new express();
+  const publicFolder = path.join(__dirname, '..', 'public');
+  const router = jsonServer.router(path.join(publicFolder, 'db.json'));
 
-  app.use(express.static(path.join(__dirname, '../dist')));
+  app.use('/api', router);
   app.use(bodyParser.json());
-
-  app.get('/api/wishes', (req, res) => {
-    res.send(wishes);
-  });
-
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-  });
-
-  app.get('/wishes', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist', 'wishes.html'));
-  });
 
   return app;
 };

@@ -62,11 +62,11 @@ const getWish = ({
   </li>`;
 
 const render = ({ lists, visibility }) => {
-  const { categories, items } = lists;
+  const { categories, wishes } = lists;
   const html = categories
     .map(({ id, name }) => {
       const title = `<h4 class="category-title">${name}</h4>`;
-      const list = items
+      const list = wishes
         .filter(byCategory(id))
         .filter(byVisibility(visibility))
         .map(getWish)
@@ -86,9 +86,9 @@ const getQuery = search => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const wishes = await request('/api/wishes');
+  const lists = await request('/api/db');
 
   const { v = '' } = getQuery(window.location.search);
   const visibility = v.split(',').map(k => visibilityMap[k]);
-  render({ lists: wishes, visibility });
+  render({ lists, visibility });
 });
