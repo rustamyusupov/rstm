@@ -10,6 +10,7 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "start": "node src/server.js",
     "build": "parcel build --target server && parcel build --target client",
+    "deploy": "git push heroku master",
     "lint": "eslint ."
   },
   "targets": {
