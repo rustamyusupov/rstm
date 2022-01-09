@@ -1,0 +1,28 @@
+{
+  "name": "rstm",
+  "version": "1.0.0",
+  "description": "Personal stuff about me",
+  "license": "MIT",
+  "private": true,
+  "author": "Rustam Yuspov",
+  "scripts": {
+    "prebuild": "rm -Rf dist/ .parcel-cache",
+    "start": "parcel",
+    "build": "parcel build --no-cache",
+    "lint": "eslint ."
+  },
+  "targets": {
+    "default": {
+      "source": [
+        "./src/index.html",
+        "./src/wishes.html"
+      ],
+      "publicUrl": "./",
+      "sourceMap": false
+    }
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "parcel": "^2.1.1"
+  }
+}
