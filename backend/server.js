@@ -3,7 +3,7 @@ const jsonServer = require('json-server');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 
 const server = () => {
   const app = new express();
@@ -16,5 +16,5 @@ const server = () => {
 };
 
 server().listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+  console.log(`Listening on port ${port}`);
 });
