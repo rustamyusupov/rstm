@@ -6,12 +6,14 @@
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
-    "prebuild": "rm -Rf dist/",
+    "prebuild": "rm -Rf dist/ .parcel-cache",
     "dev:server": "nodemon --exec babel-node src/server.js",
     "dev:client": "parcel --target client",
     "dev": "concurrently npm:dev:*",
-    "start": "node src/server.js",
-    "build": "parcel build --target server && parcel build --target client",
+    "build:server": "parcel build --target server --no-cache && cp src/db.json dist",
+    "build:client": "parcel build --target client --no-cache",
+    "build": "concurrently npm:build:*",
+    "start": "node dist/server.js",
     "deploy": "git push heroku master",
     "lint": "eslint ."
   },
@@ -21,21 +23,20 @@
         "./src/index.html",
         "./src/wishes.html"
       ],
-      "distDir": "./dist",
+      "publicUrl": "./",
+      "distDir": "dist",
       "engines": {
         "browsers": "> 0.5%, last 2 versions, not dead"
       },
-      "sourceMap": false,
-      "includeNodeModules": true
+      "sourceMap": false
     },
     "server": {
       "source": "./src/server.js",
-      "distDir": "./dist",
+      "distDir": "dist",
       "engines": {
         "node": ">= 17"
       },
-      "sourceMap": false,
-      "includeNodeModules": true
+      "sourceMap": false
     }
   },
   "dependencies": {

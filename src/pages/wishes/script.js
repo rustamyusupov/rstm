@@ -1,4 +1,4 @@
-import request from '/src/utils/request';
+import request from '../../utils/request';
 
 const archive = new URL('../../../public/archive.svg', import.meta.url);
 const hidden = new URL('../../../public/hidden.svg', import.meta.url);

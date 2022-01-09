@@ -7,8 +7,7 @@ const port = process.env.PORT || 8000;
 
 const server = () => {
   const app = new express();
-  const publicFolder = path.join(__dirname, '..', 'public');
-  const router = jsonServer.router(path.join(publicFolder, 'db.json'));
+  const router = jsonServer.router(path.join(__dirname, 'db.json'));
 
   app.use('/api', router);
   app.use(bodyParser.json());
