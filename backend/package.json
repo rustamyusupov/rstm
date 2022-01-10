@@ -1,15 +1,13 @@
 {
   "name": "rstm",
   "version": "1.0.0",
-  "description": "Personal stuff about me",
   "license": "MIT",
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
     "prebuild": "rm -Rf dist/ .parcel-cache",
-    "dev": "nodemon --exec babel-node server.js",
+    "start": "nodemon --exec babel-node server.js",
     "build": "parcel build --no-cache && cp db.json dist",
-    "start": "node dist/server.js",
     "lint": "eslint ."
   },
   "targets": {
