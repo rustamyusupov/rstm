@@ -20,10 +20,15 @@
   margin-bottom: 10px;
 }
 
-.wish-icon {
+.wish:hover .wish-button {
+  display: block;
+}
+
+.wish-button {
+  display: none;
   position: absolute;
   top: 50%;
-  left: 3px;
+  left: 0;
   transform: translateY(-50%);
 }
 
@@ -31,6 +36,7 @@
   color: var(--color-link);
 }
 
+.bought,
 .presented {
   color: var(--color-black);
   text-decoration: line-through;
