@@ -24,20 +24,20 @@
   display: block;
 }
 
+.wish > .link {
+  color: var(--color-link);
+}
+
+.wish.bought,
+.wish.presented > .link {
+  color: var(--color-black);
+  text-decoration: line-through;
+}
+
 .wish-button {
   display: none;
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-}
-
-.active {
-  color: var(--color-link);
-}
-
-.bought,
-.presented {
-  color: var(--color-black);
-  text-decoration: line-through;
 }
