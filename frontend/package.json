@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
+    "classnames": "^2.3.1",
     "eslint": "^8.6.0",
     "parcel": "^2.1.1",
     "postcss": "^8.4.5",
