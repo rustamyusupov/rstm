@@ -6,7 +6,7 @@
   margin-bottom: 20px;
 }
 
-.category-title {
+.title {
   margin-bottom: 10px;
 }
 
@@ -14,30 +14,34 @@
   position: relative;
   padding-left: 20px;
   max-width: 70ch;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &:hover .button {
+    display: block;
+  }
 }
 
-.wish:not(:last-child) {
-  margin-bottom: 10px;
+.wish_active {
+  color: red;
 }
 
-.wish:hover .wish-button {
-  display: block;
-}
-
-.wish > .link {
-  color: var(--color-link);
-}
-
-.wish.bought,
-.wish.presented > .link {
+.bought,
+.presented > .link {
   color: var(--color-black);
   text-decoration: line-through;
 }
 
-.wish-button {
+.button {
   display: none;
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+}
+
+.link {
+  color: var(--color-link);
 }
