@@ -24,10 +24,6 @@
   }
 }
 
-.wish_active {
-  color: red;
-}
-
 .bought,
 .presented > .link {
   color: var(--color-black);
