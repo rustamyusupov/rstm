@@ -20,7 +20,7 @@ const bindButtonEvents = () => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const data = await request('/api/categories?_embed=wishes');
+  const data = await request('/api/categories');
   const content = getContent(data);
 
   render(content);

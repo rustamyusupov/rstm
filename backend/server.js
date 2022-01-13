@@ -8,8 +8,13 @@ const port = process.env.PORT || 8080;
 const server = () => {
   const app = new express();
   const router = jsonServer.router(path.join(__dirname, 'db.json'));
+  const routes = jsonServer.rewriter({
+    '/api/*': '/$1',
+    '/categories': '/categories?_embed=wishes',
+  });
 
-  app.use('/api', router);
+  app.use(routes);
+  app.use(router);
   app.use(bodyParser.json());
 
   return app;
