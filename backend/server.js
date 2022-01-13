@@ -3,7 +3,7 @@ const jsonServer = require('json-server');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const server = () => {
   const app = new express();
