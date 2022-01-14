@@ -54,6 +54,9 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v2
 
+      - name: Show folders structure
+        run: ls -R
+
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
