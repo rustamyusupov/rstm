@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-folder
-          path: dist
+          path: frontend/dist
 
   push:
     runs-on: ubuntu-latest
