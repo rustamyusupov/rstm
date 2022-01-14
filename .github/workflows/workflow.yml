@@ -58,8 +58,9 @@ jobs:
           path: dist
 
       - name: Show folders structure
-        run: pwd
-        run: ls -R
+        run: |
+          pwd
+          ls -R
 
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
