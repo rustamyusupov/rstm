@@ -4,12 +4,6 @@ on:
   push:
     branches: [master]
 
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Image version'
-        required: true
-
 env:
   REGISTRY: 'registry.digitalocean.com/rstm-registry-container'
   IMAGE_NAME: 'rstm-frontend'
@@ -56,11 +50,6 @@ jobs:
         with:
           name: build-folder
           path: frontend/dist
-
-      - name: Show folders structure
-        run: |
-          pwd
-          ls -R
 
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
