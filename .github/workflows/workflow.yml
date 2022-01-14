@@ -34,8 +34,8 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Display structure of downloaded files
-        run: ls .
+      - name: Display structure of build folder
+        run: ls dist
 
       - name: Upload dist
         uses: actions/upload-artifact@v2
