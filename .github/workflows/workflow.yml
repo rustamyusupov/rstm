@@ -34,14 +34,11 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Display structure of build folder
-        run: ls dist
-
-      - name: Upload dist
+      - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: build-folder
-          path: ./dist
+          path: dist
 
   push:
     runs-on: ubuntu-latest
@@ -54,10 +51,8 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v2
 
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v2
-        with:
-          name: build-folder
 
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
