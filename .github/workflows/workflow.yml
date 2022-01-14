@@ -53,8 +53,12 @@ jobs:
 
       - name: Download build artifacts
         uses: actions/download-artifact@v2
+        with:
+          name: build-folder
+          path: dist
 
       - name: Show folders structure
+        run: pwd
         run: ls -R
 
       - name: Build container image
