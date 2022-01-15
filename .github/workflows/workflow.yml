@@ -14,22 +14,13 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-
     steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run linters
-        run: npm run lint
-
+      - uses: actions/checkout@v2
       - name: Build application
+        run: npm install
+        run: npm run lint
         run: npm run build
-
-      - name: Archive build artifacts
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: build-folder
           path: frontend/dist
@@ -42,30 +33,19 @@ jobs:
         working-directory: ./frontend
 
     steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v2
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
         with:
           name: build-folder
           path: frontend/dist
-
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+      - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      - name: Push to DigitalOcean Container Registry
         run: doctl registry login --expiry-seconds 600
-
-      - name: Remove all old images
         run: if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
-
-      - name: Push image to DigitalOcean Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
 
   deploy:
@@ -73,7 +53,7 @@ jobs:
     needs: push
 
     steps:
-      - name: Deploy to Digital Ocean droplet via SSH action
+      - name: Deploy to Digital Ocean droplet
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
