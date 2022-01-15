@@ -36,6 +36,7 @@ jobs:
       - name: Push to DigitalOcean Container Registry
         run: |
           doctl registry login --expiry-seconds 600
+          if [ ! -z "$(doctl registry repository list | grep "$(echo $REGISTRY)")" ]; then doctl registry repository delete-manifest $(echo $REGISTRY) $(doctl registry repository list-tags $(echo $REGISTRY) | grep -o "sha.*") --force; else echo "No repository"; fi
           docker-compose push
 
   deploy:
