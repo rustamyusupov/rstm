@@ -6,38 +6,26 @@ on:
 
 env:
   REGISTRY: 'registry.digitalocean.com/rstm-registry-container'
-  IMAGE_NAME: 'rstm'
+IMAGE_NAME: 'rstm-frontend'
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Build container image
-  #       run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
-  #     - uses: digitalocean/action-doctl@v2
-  #       with:
-  #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-  #     - name: Push to DigitalOcean Container Registry
-  #       run: |
-  #         doctl registry login --expiry-seconds 600
-  #         if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
-  #         docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
-
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - uses: actions/checkout@v2
       - name: Build container image
-        run: docker-compose up -d
+        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
       - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Push to DigitalOcean Container Registry
         run: |
           doctl registry login --expiry-seconds 600
-          if [ ! -z "$(doctl registry repository list | grep "$(echo $REGISTRY)")" ]; then doctl registry repository delete-manifest $(echo $REGISTRY) $(doctl registry repository list-tags $(echo $REGISTRY) | grep -o "sha.*") --force; else echo "No repository"; fi
-          docker-compose push
+          if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
+          docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
 
   deploy:
     runs-on: ubuntu-latest
