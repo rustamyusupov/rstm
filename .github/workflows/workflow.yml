@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: 'registry.digitalocean.com/rstm-registry-container'
-IMAGE_NAME: 'rstm-frontend'
+  IMAGE_NAME: 'rstm-frontend'
 
 jobs:
   build:
