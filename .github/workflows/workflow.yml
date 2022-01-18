@@ -36,14 +36,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          envs: IMAGE_NAME,REGISTRY,GITHUB_SHA,{{ secrets.DOCKERHUB_USERNAME }},{{ secrets.DOCKERHUB_TOKEN }}
+          envs: REGISTRY, IMAGE_NAME, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
           script: |
             # Login to registry
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            # Stop running container
-            docker stop $IMAGE_NAME
-            # Remove old container
-            docker rm $IMAGE_NAME
+            # Stop all running container
+            docker stop $(docker ps -aq)
+            # Remove all containers
+            docker rm $(docker ps -aq)
+            # Remove all images
+            docker rmi $(docker images -q)
             # Pull container
             docker pull $REGISTRY/$IMAGE_NAME:latest
             # Run a new container from a new image
