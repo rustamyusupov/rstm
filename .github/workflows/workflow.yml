@@ -21,9 +21,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker image
-        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+        run: docker build -t $REGISTRY/$IMAGE_NAME:latest .
       - name: Docker Push
-        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+        run: docker push $REGISTRY/$IMAGE_NAME:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,14 +41,14 @@ jobs:
             # Login to registry
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             # Stop running container
-            docker stop $(echo $IMAGE_NAME)
+            docker stop $IMAGE_NAME
             # Remove old container
-            docker rm $(echo $IMAGE_NAME)
+            docker rm $IMAGE_NAME
             # Pull container
-            docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            docker pull $REGISTRY/$IMAGE_NAME:latest
             # Run a new container from a new image
             docker run -d \
             --publish 80:80 \
             --restart always \
-            --name $(echo $IMAGE_NAME) \
-            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            --name $IMAGE_NAME \
+            $REGISTRY/$IMAGE_NAME:latest
