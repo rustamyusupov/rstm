@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          envs: REGISTRY, FRONTEND_IMAGE, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
+          envs: REGISTRY, FRONTEND_IMAGE, BACKEND_IMAGE, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
           script: |
             # Login to registry
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -43,15 +43,15 @@ jobs:
             # Remove all images
             docker rmi -f $(docker images -aq)
             # Pull containers
-            docker pull $REGISTRY/FRONTEND_IMAGE:latest
-            docker pull $REGISTRY/BACKEND_IMAGE:latest
+            docker pull $REGISTRY/$FRONTEND_IMAGE:latest
+            docker pull $REGISTRY/$BACKEND_IMAGE:latest
             # Run containers
             docker run -d \
               --restart always \
-              --name BACKEND_IMAGE \
-              $REGISTRY/BACKEND_IMAGE:latest
+              --name $BACKEND_IMAGE \
+              $REGISTRY/$BACKEND_IMAGE:latest
             docker run -d \
               --publish 80:80 \
               --restart always \
-              --name FRONTEND_IMAGE \
-              $REGISTRY/FRONTEND_IMAGE:latest
+              --name $FRONTEND_IMAGE \
+              $REGISTRY/$FRONTEND_IMAGE:latest
