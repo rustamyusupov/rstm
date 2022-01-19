@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: registry.digitalocean.com/rstm-registry-container/frontend
+    image: rustamyusupov/rstm-frontend
     build:
       context: ./frontend
     ports:
@@ -12,7 +12,7 @@ services:
       - backend
 
   backend:
-    image: registry.digitalocean.com/rstm-registry-container/backend
+    image: rustamyusupov/rstm-backend
     build:
       context: ./backend
     networks:
