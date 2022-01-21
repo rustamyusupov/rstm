@@ -10,11 +10,15 @@ services:
     networks:
       - frontend
       - backend
+    depends_on:
+      - backend
 
   backend:
     image: rustamyusupov/rstm-backend
     build:
       context: ./backend
+    ports:
+      - '3000:3000'
     networks:
       - backend
 
