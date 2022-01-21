@@ -43,10 +43,11 @@ jobs:
             # Remove all images
             docker rmi -f $(docker images -aq)
             # Pull containers
-            docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             docker pull $REGISTRY/$BACKEND_IMAGE:latest
+            docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
             docker run -d \
+              --publish 3000:3000
               --restart always \
               --name $BACKEND_IMAGE \
               $REGISTRY/$BACKEND_IMAGE:latest
