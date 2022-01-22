@@ -47,14 +47,3 @@ jobs:
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
             docker-compose up -d
-            # docker run -d \
-            #   --publish 3000:3000 \
-            #   --restart always \
-            #   --name $BACKEND_IMAGE \
-            #   $REGISTRY/$BACKEND_IMAGE:latest
-            # docker run -d \
-            #   --network="host" \
-            #   --publish 80:80 \
-            #   --restart always \
-            #   --name $FRONTEND_IMAGE \
-            #   $REGISTRY/$FRONTEND_IMAGE:latest
