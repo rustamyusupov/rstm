@@ -8,8 +8,7 @@ services:
     ports:
       - '80:80'
     networks:
-      - frontend
-      - backend
+      - local
     depends_on:
       - backend
 
@@ -18,8 +17,7 @@ services:
     build:
       context: ./backend
     networks:
-      - backend
+      - local
 
 networks:
-  frontend:
-  backend:
+  local:
