@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker images
-        run: docker-compose build
+        run: docker-compose build --parallel
       - name: Docker Push
         run: docker-compose push
 
