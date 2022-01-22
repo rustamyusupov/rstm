@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: rustamyusupov/rstm-frontend
+    ports:
+      - '80:80'
+    networks:
+      - local
+    depends_on:
+      - backend
+
+  backend:
+    image: rustamyusupov/rstm-backend
+    networks:
+      - local
+
+networks:
+  local:
