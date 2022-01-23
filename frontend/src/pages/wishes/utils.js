@@ -1,10 +1,11 @@
-// const statuses = {
-//   archive: 'archive',
-//   bought: 'bought',
-//   hidden: 'hidden',
-//   presented: 'presented',
-//   unwanted: 'unwanted',
-// };
+const statuses = {
+  archive: 'archive',
+  bought: 'bought',
+  hidden: 'hidden',
+  presented: 'presented',
+  unwanted: 'unwanted',
+};
+const hiddenStatuses = [statuses.archive, statuses.hidden];
 
 const getPrice = ({ price, currency, ...rest }) => ({
   price: Math.ceil(price).toLocaleString('ru', {
@@ -15,12 +16,13 @@ const getPrice = ({ price, currency, ...rest }) => ({
   ...rest,
 });
 
-const notArchive = ({ statuses }) => !statuses.includes('archive');
+const notHidden = ({ statuses: s }) =>
+  hiddenStatuses.filter(v => s.includes(v)).length === 0;
 
 export const getContent = data => {
   const content = data.map(({ name, wishes }) => ({
     name,
-    wishes: wishes.filter(notArchive).map(getPrice),
+    wishes: wishes.filter(notHidden).map(getPrice),
   }));
 
   return content;
