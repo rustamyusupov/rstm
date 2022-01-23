@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean
+name: Deploy
 
 on:
   push:
@@ -13,21 +13,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker/login-action@v1
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Login to the Docker
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker images
         run: docker-compose build --parallel
-      - name: Docker Push
+      - name: Push images to the Docker
         run: docker-compose push
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to Digital Ocean droplet
+      - name: Deploy to Digital Ocean
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -36,13 +38,13 @@ jobs:
           port: ${{ secrets.PORT }}
           envs: REGISTRY, FRONTEND_IMAGE, BACKEND_IMAGE, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
           script: |
-            # Login to registry
+            # Login to the Docker
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            # Delete all containers
+            # Remove all containers
             docker rm -vf $(docker ps -aq)
             # Remove all images
             docker rmi -f $(docker images -aq)
-            # Pull containers
+            # Pull images
             docker pull $REGISTRY/$BACKEND_IMAGE:latest
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
