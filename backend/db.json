@@ -24,15 +24,6 @@
       "statuses": []
     },
     {
-      "id": 1,
-      "categoryId": 0,
-      "name": "4iiii Precision SH 7000 Left Crank Power Meter",
-      "link": "https://www.bikeinn.com/bike/4iiii-precision-sh-7000-left-crank-power-meter/137530674/p",
-      "price": 19287.49,
-      "currency": "RUB",
-      "statuses": []
-    },
-    {
       "id": 2,
       "categoryId": 0,
       "name": "Sony’s WH-1000XM4",
@@ -40,6 +31,15 @@
       "price": 350,
       "currency": "USD",
       "statuses": []
+    },
+    {
+      "id": 1,
+      "categoryId": 0,
+      "name": "4iiii Precision SH 7000 Left Crank Power Meter",
+      "link": "https://www.bikeinn.com/bike/4iiii-precision-sh-7000-left-crank-power-meter/137530674/p",
+      "price": 19287.49,
+      "currency": "RUB",
+      "statuses": ["hidden"]
     },
     {
       "id": 3,
