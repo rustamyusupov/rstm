@@ -1,23 +1,42 @@
 version: '3.8'
 
 services:
+  backend:
+    image: rustamyusupov/rstm-backend
+    build:
+      context: ./backend
+      dockerfile: ../Dockerfile
+    command: node dist/server.js
+    networks:
+      - local
+
   frontend:
     image: rustamyusupov/rstm-frontend
     build:
       context: ./frontend
-    ports:
-      - '80:80'
+      dockerfile: ../Dockerfile
+    volumes:
+      - static:/dist
     networks:
       - local
     depends_on:
       - backend
 
-  backend:
-    image: rustamyusupov/rstm-backend
-    build:
-      context: ./backend
+  nginx:
+    image: nginx:1.20.2-alpine
+    ports:
+      - '80:80'
+      - '3000:3000'
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - static:/usr/share/nginx/html
     networks:
       - local
+    depends_on:
+      - frontend
+
+volumes:
+  static:
 
 networks:
   local:

@@ -1,3 +1,4 @@
 .parcel-cache
+.proxyrc
 node_modules
 dist
