@@ -15,6 +15,16 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+      - name: Copy files to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: 'maintain/docker-compose.yml,maintain/default.conf'
+          target: '.'
+          strip_components: 1
       - name: Login to the Docker
         uses: docker/login-action@v1
         with:
@@ -29,16 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Copy files to DO
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          source: 'maintain/docker-compose.yml,maintain/default.conf'
-          target: 'root'
-      - name: Deploy on DO
+      - name: Deploy on Digital Ocean
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
