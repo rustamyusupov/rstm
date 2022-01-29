@@ -29,13 +29,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to Digital Ocean
+      - name: Copy files to DO
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: 'maintain/docker-compose.yml,maintain/default.conf'
+          target: 'root'
+      - name: Deploy on DO
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
           envs: REGISTRY, FRONTEND_IMAGE, BACKEND_IMAGE, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
           script: |
             # Login to the Docker
