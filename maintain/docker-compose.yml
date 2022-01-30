@@ -26,7 +26,6 @@ services:
       - '443:443'
       - '3000:3000'
     volumes:
-      # - ./etc/ssl:/etc/nginx/ssl
       - ./default.conf:/etc/nginx/service.conf
       - static:/usr/share/nginx/html
     environment:

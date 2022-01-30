@@ -59,3 +59,5 @@ jobs:
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
             docker-compose up -d
+            # Delete temp files
+            rm docker-compose.yml default.conf
