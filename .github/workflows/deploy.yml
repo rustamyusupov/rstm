@@ -6,8 +6,10 @@ on:
 
 env:
   REGISTRY: 'rustamyusupov'
-  FRONTEND_IMAGE: 'rstm-frontend'
   BACKEND_IMAGE: 'rstm-backend'
+  FRONTEND_IMAGE: 'rstm-frontend'
+  COMPOSE_FILE: 'docker-compose.yml'
+  NGINX_FILE: 'default.conf'
 
 jobs:
   build:
@@ -22,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: 'maintain/docker-compose.yml,maintain/default.conf'
+          source: 'maintain/$COMPOSE_FILE,maintain/$NGINX_FILE'
           target: '.'
           strip_components: 1
       - name: Login to the Docker
@@ -60,4 +62,4 @@ jobs:
             # Run containers
             docker-compose up -d
             # Delete temp files
-            rm docker-compose.yml default.conf
+            rm $COMPOSE_FILE $NGINX_FILE
