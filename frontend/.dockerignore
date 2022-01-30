@@ -1,4 +1,4 @@
 .parcel-cache
+.vscode
 .proxyrc
-node_modules
 dist
