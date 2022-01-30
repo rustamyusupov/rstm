@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: 'maintain/$COMPOSE_FILE,maintain/$NGINX_FILE'
+          source: 'maintain/.'
           target: '.'
           strip_components: 1
       - name: Login to the Docker
@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          envs: REGISTRY, FRONTEND_IMAGE, BACKEND_IMAGE, {{ secrets.DOCKERHUB_USERNAME }}, {{ secrets.DOCKERHUB_TOKEN }}
+          envs: REGISTRY, BACKEND_IMAGE, FRONTEND_IMAGE, COMPOSE_FILE, NGINX_FILE
           script: |
             # Login to the Docker
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
