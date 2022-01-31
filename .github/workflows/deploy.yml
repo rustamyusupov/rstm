@@ -18,15 +18,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Copy files to Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          script: whoami
-
-      - name: Copy files to Digital Ocean
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
