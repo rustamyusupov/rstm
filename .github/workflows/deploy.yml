@@ -5,6 +5,7 @@ on:
     branches: [master]
 
 env:
+  MAINTAIN_FOLDER: 'maintain'
   REGISTRY: 'rustamyusupov'
   BACKEND_IMAGE: 'rstm-backend'
   FRONTEND_IMAGE: 'rstm-frontend'
@@ -24,7 +25,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: 'maintain/'
+          source: '${{ env.MAINTAIN_FOLDER }}/'
           target: '.'
           strip_components: 1
       - name: Login to the Docker
@@ -60,6 +61,6 @@ jobs:
             docker pull $REGISTRY/$BACKEND_IMAGE:latest
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
-            EMAIL=i@rstm.me FQDN=rstm.me docker-compose up -d
+            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
             # Delete temp files
             rm $COMPOSE_FILE $NGINX_FILE
