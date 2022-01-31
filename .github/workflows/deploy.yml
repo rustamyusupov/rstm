@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: 'maintain/docker-compose.yml,maintain/default.conf'
+          source: 'maintain/'
           target: '.'
           strip_components: 1
       - name: Login to the Docker
