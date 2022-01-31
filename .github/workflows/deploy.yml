@@ -60,6 +60,6 @@ jobs:
             docker pull $REGISTRY/$BACKEND_IMAGE:latest
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
-            docker-compose up -d
+            EMAIL=i@rstm.me FQDN=rstm.me docker-compose up -d
             # Delete temp files
             rm $COMPOSE_FILE $NGINX_FILE

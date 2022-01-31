@@ -31,8 +31,8 @@ services:
     environment:
       - TZ=GMT
       - LETSENCRYPT=true
-      - LE_EMAIL=i@rstm.me
-      - LE_FQDN=rstm.me
+      - LE_EMAIL=${EMAIL}
+      - LE_FQDN=${FQDN}
     networks:
       - local
     depends_on:
