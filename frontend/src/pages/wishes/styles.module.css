@@ -18,9 +18,23 @@
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+}
 
-  &:hover .button {
-    display: block;
+.button {
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.not-touch {
+  .wish:hover .button {
+    opacity: 1;
+  }
+
+  .button {
+    opacity: 0;
   }
 }
 
@@ -28,14 +42,6 @@
 .presented > .link {
   color: var(--color-black);
   text-decoration: line-through;
-}
-
-.button {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
 }
 
 .link {

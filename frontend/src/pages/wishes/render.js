@@ -1,6 +1,7 @@
 import cx from 'classnames';
 
 import '../../styles/global.module.css';
+import isTouchDevice from '../../utils/isTouchDevice';
 
 import * as styles from './styles.module.css';
 
@@ -46,7 +47,9 @@ const render = content => {
     })
     .join('');
 
-  container.className = styles.wishes;
+  container.className = cx(styles.wishes, {
+    [styles['not-touch']]: !isTouchDevice(),
+  });
   container.innerHTML = html;
 };
 
