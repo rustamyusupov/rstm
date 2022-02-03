@@ -129,7 +129,7 @@
       "link": "https://www.bikeinn.com/bike/poc-omne-air-spin-road-helmet/136992662/p",
       "price": 11988.49,
       "currency": "RUB",
-      "statuses": []
+      "statuses": ["archive", "unwanted"]
     },
     {
       "id": 13,
