@@ -2,7 +2,7 @@
 
 import request from '../../utils/request';
 
-// import * as styles from './styles.module.css';
+import * as styles from './styles.module.css';
 import { getContent } from './utils';
 import render from './render';
 
