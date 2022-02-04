@@ -53,14 +53,12 @@ jobs:
           script: |
             # Login to the Docker
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            # Remove all containers
+            # Clean docker
+            docker-compose down
             docker rm -vf $(docker ps -aq)
-            # Remove all images
             docker rmi -f $(docker images -aq)
-            # Pull images
-            docker pull $REGISTRY/$BACKEND_IMAGE:latest
-            docker pull $REGISTRY/$FRONTEND_IMAGE:latest
+            docker system prune --volumes -af
             # Run containers
-            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d --no-cache
+            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
             # Delete temp files
             rm $COMPOSE_FILE $NGINX_FILE
