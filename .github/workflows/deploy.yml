@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker images
-        run: docker-compose build --parallel
+        run: docker-compose build --no-cache --parallel
       - name: Push images to the Docker
         run: docker-compose push
 
@@ -61,6 +61,6 @@ jobs:
             docker pull $REGISTRY/$BACKEND_IMAGE:latest
             docker pull $REGISTRY/$FRONTEND_IMAGE:latest
             # Run containers
-            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
+            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d --no-cache
             # Delete temp files
             rm $COMPOSE_FILE $NGINX_FILE
