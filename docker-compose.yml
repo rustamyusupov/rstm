@@ -2,19 +2,21 @@ version: '3.8'
 
 services:
   backend:
-    image: rustamyusupov/rstm-backend
-    build:
-      context: ./backend
-      dockerfile: ../Dockerfile
-    command: node dist/server.js
+    container_name: backend
+    restart: always
+    build: backend
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - 3000
     networks:
       - local
 
   frontend:
-    image: rustamyusupov/rstm-frontend
-    build:
-      context: ./frontend
-      dockerfile: ../Dockerfile
+    container_name: frontend
+    restart: always
+    build: frontend
     volumes:
       - static:/dist
     networks:

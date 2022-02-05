@@ -5,19 +5,9 @@
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
-    "prebuild": "rm -Rf dist/ .parcel-cache",
-    "start": "nodemon --exec babel-node server.js",
-    "build": "parcel build --no-cache && cp db.json dist",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "lint": "eslint ."
-  },
-  "targets": {
-    "default": {
-      "source": "server.js",
-      "engines": {
-        "node": ">= 17"
-      },
-      "sourceMap": false
-    }
   },
   "dependencies": {
     "body-parser": "^1.19.1",
@@ -25,11 +15,6 @@
     "json-server": "^0.17.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
-    "@babel/core": "^7.16.7",
-    "@babel/node": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "nodemon": "^2.0.15",
-    "parcel": "^2.1.1"
+    "nodemon": "^2.0.15"
   }
 }
