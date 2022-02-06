@@ -6,7 +6,6 @@
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
-    "prebuild": "rm -Rf dist/ .parcel-cache",
     "start": "parcel",
     "build": "parcel build --no-cache",
     "lint": "eslint ."
