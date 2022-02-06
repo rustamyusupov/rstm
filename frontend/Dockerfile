@@ -13,8 +13,7 @@ RUN npm run build
 RUN npm prune --production
 
 
-FROM node:12-alpine
+FROM nginx:1.21.6-alpine
 
-WORKDIR /usr/src/app
-
-COPY --from=BUILD /usr/src/app/dist .
+COPY --from=BUILD /usr/src/app/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=BUILD /usr/src/app/dist /usr/share/nginx/html
