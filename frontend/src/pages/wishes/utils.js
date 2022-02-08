@@ -20,6 +20,10 @@ const notHidden = ({ statuses: s }) =>
   hiddenStatuses.filter(v => s.includes(v)).length === 0;
 
 export const getContent = data => {
+  if (!data.length) {
+    return [];
+  }
+
   const content = data.map(({ name, wishes }) => ({
     name,
     wishes: wishes.filter(notHidden).map(getPrice),
