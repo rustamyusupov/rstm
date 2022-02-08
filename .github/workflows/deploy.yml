@@ -8,7 +8,6 @@ env:
   BACKEND_IMAGE: 'rstm-backend'
   FRONTEND_IMAGE: 'rstm-frontend'
   COMPOSE_FILE: 'docker-compose.yml'
-  NGINX_FILE: 'default.conf'
 
 jobs:
   build:
@@ -16,15 +15,6 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - name: Copy files to Digital Ocean
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          source: '${{ env.COMPOSE_FILE }}'
-          target: '.'
       - name: Login to the Docker
         uses: docker/login-action@v1
         with:
@@ -34,6 +24,15 @@ jobs:
         run: docker-compose build --no-cache --parallel
       - name: Push images to the Docker
         run: docker-compose push
+      - name: Copy compose file to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: '${{ env.COMPOSE_FILE }}'
+          target: '.'
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +45,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          envs: REGISTRY, BACKEND_IMAGE, FRONTEND_IMAGE, COMPOSE_FILE, NGINX_FILE
+          envs: REGISTRY, BACKEND_IMAGE, FRONTEND_IMAGE, COMPOSE_FILE
           script: |
             # Login to the Docker
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -56,4 +55,4 @@ jobs:
             # Run containers
             EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
             # Delete temp files
-            rm $COMPOSE_FILE $NGINX_FILE
+            rm $COMPOSE_FILE
