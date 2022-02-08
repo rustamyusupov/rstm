@@ -120,7 +120,7 @@
       "link": "https://www.snowinn.com/ski-store/oakley-sutro-lite-prizm-road-sunglasses/137804939/p",
       "price": 8384.99,
       "currency": "RUB",
-      "statuses": []
+      "statuses": ["archive", "bought"]
     },
     {
       "id": 12,
@@ -192,7 +192,7 @@
       "link": "https://www.chainreactioncycles.com/ru/en/fizik-tempo-m-tx-soft-bar-tape/rp-prod181664",
       "price": 1641.99,
       "currency": "RUB",
-      "statuses": []
+      "statuses": ["archive"]
     },
     {
       "id": 20,

@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  MAINTAIN_FOLDER: 'maintain'
   REGISTRY: 'rustamyusupov'
   BACKEND_IMAGE: 'rstm-backend'
   FRONTEND_IMAGE: 'rstm-frontend'
@@ -24,9 +23,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: '${{ env.MAINTAIN_FOLDER }}/'
+          source: '${{ env.COMPOSE_FILE }}'
           target: '.'
-          strip_components: 1
       - name: Login to the Docker
         uses: docker/login-action@v1
         with:
@@ -53,9 +51,7 @@ jobs:
             # Login to the Docker
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             # Clean docker
-            docker-compose down
-            docker rm -vf $(docker ps -aq)
-            docker rmi -f $(docker images -aq)
+            docker-compose stop
             docker system prune --volumes -af
             # Run containers
             EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d

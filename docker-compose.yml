@@ -6,8 +6,7 @@ services:
     restart: always
     build: backend
     volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./db.json:/usr/src/app/db.json
     expose:
       - 3000
     networks:
