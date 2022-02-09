@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
-const index = require('./routes/index');
-const wishes = require('./routes/wishes');
+const routes = require('./routes');
 
 const port = process.env.PORT || 3000;
 const viewsPath = path.join(__dirname, '/views');
@@ -19,9 +18,7 @@ const server = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(publicPath));
-
-  app.get('/', index);
-  app.get('/wishes', wishes);
+  app.use('/', routes);
 
   return app;
 };
