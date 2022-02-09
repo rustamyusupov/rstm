@@ -1,0 +1,47 @@
+.wishes {
+  padding: 10px;
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.wish {
+  position: relative;
+  padding-left: 20px;
+  max-width: 70ch;
+}
+
+.wish:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.button {
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.not-touch .button {
+  opacity: 0;
+}
+
+.not-touch .wish:hover .button {
+  opacity: 1;
+}
+
+.bought,
+.presented > .link {
+  color: var(--color-black);
+  text-decoration: line-through;
+}
+
+.link {
+  color: var(--color-link);
+}

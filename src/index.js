@@ -3,6 +3,7 @@ const path = require('path');
 const logger = require('morgan');
 
 const index = require('./routes/index');
+const wishes = require('./routes/wishes');
 
 const port = process.env.PORT || 3000;
 const viewsPath = path.join(__dirname, '/views');
@@ -20,6 +21,7 @@ const server = () => {
   app.use(express.static(publicPath));
 
   app.get('/', index);
+  app.get('/wishes', wishes);
 
   return app;
 };
