@@ -1,13 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 const port = process.env.PORT || 3000;
+const public = path.join(__dirname, '..', '/public');
 
 const server = () => {
   const app = new express();
 
-  app.get('/', (req, res) => {
-    res.send('Hello World!');
-  });
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(express.static(public));
 
   return app;
 };
