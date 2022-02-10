@@ -1,12 +1,13 @@
 const express = require('express');
-const path = require('path');
 const logger = require('morgan');
+const path = require('path');
 
+const api = require('./api');
 const routes = require('./routes');
 
 const port = process.env.PORT || 3000;
-const viewsPath = path.join(__dirname, '/views');
 const publicPath = path.join(__dirname, '..', '/public');
+const viewsPath = path.join(__dirname, '/views');
 
 const server = () => {
   const app = new express();
@@ -18,7 +19,9 @@ const server = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(publicPath));
-  app.use('/', routes);
+  app.use(routes);
+  app.use(api.routes);
+  app.use(api.router);
 
   return app;
 };
