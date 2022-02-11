@@ -1,0 +1,17 @@
+.page,
+.page__body {
+  height: 100%;
+}
+
+.page {
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: white;
+}
+
+.page__body {
+  max-width: 1920px;
+  margin: 0 auto;
+}

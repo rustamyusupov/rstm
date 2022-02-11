@@ -1,59 +1,23 @@
-name: Deploy
+name: deploy
 
 on:
   push:
-    branches: [master]
-
-env:
-  REGISTRY: 'rustamyusupov'
-  BACKEND_IMAGE: 'rstm-backend'
-  FRONTEND_IMAGE: 'rstm-frontend'
-  COMPOSE_FILE: 'docker-compose.yml'
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-      - name: Login to the Docker
-        uses: docker/login-action@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 17
+      - uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build the Docker images
-        run: docker-compose build --no-cache --parallel
-      - name: Push images to the Docker
-        run: docker-compose push
-      - name: Copy compose file to Digital Ocean
-        uses: appleboy/scp-action@master
+      - uses: docker/build-push-action@v2
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          source: '${{ env.COMPOSE_FILE }}'
-          target: '.'
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy on Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          envs: REGISTRY, BACKEND_IMAGE, FRONTEND_IMAGE, COMPOSE_FILE
-          script: |
-            # Login to the Docker
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            # Clean docker
-            docker-compose stop
-            docker system prune --volumes -af
-            # Run containers
-            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
-            # Delete temp files
-            rm $COMPOSE_FILE
+          push: true
+          tags: rustamyusupov/rstm:latest
