@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "lint": "eslint ."
+    "lint": "eslint src/**/*.js"
   },
   "dependencies": {
     "express": "^4.17.2",
