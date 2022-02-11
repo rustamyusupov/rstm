@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const app = require('../src');
+const http = require('http');
+
+const port = process.env.PORT || '3000';
+const server = http.createServer(app);
+
+app.set('port', port);
+server.listen(port);

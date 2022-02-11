@@ -2,12 +2,11 @@
   "name": "rstm",
   "version": "1.0.0",
   "description": "Personal stuff about me",
-  "license": "MIT",
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "lint": "eslint ."
   },
   "dependencies": {
