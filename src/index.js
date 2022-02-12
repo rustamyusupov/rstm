@@ -22,7 +22,6 @@ app.use(express.static(iconsPath));
 app.use(express.static(stylesPath));
 app.use(express.static(scriptsPath));
 app.use(routes);
-app.use(api.routes);
-app.use(api.router);
+app.use(api.routes, api.router);
 
 module.exports = app;
