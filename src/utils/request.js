@@ -1,6 +1,6 @@
-const p = require('phin');
+const axios = require('axios');
 
-module.exports = options =>
-  p
-    .defaults({ parse: 'json' })(options)
-    .then(res => res?.body);
+const instance = axios.create({ baseURL: 'http://localhost:3000' });
+
+module.exports = (url, options) =>
+  instance(url, options).then(response => response.data);
