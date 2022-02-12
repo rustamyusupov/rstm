@@ -45,4 +45,4 @@ jobs:
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker-compose stop
             docker system prune --volumes -af
-            docker-compose up -d
+            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
