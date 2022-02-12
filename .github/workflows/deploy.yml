@@ -43,7 +43,6 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            docker rm -vf $(docker ps -aq)
-            docker rmi -f $(docker images -aq)
+            docker-compose stop
             docker system prune --volumes -af
             docker-compose up -d
