@@ -5,6 +5,9 @@ on:
     branches:
       - 'master'
 
+env:
+  MAINTAIN: 'maintain'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,9 +30,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: 'maintain/'
+          source: '${{ env.MAINTAIN }}/'
           target: '.'
-          strip_components: 1
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,4 +47,5 @@ jobs:
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker-compose stop
             docker system prune --volumes -af
-            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} docker-compose up -d
+            EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} \
+              docker-compose -f ${{ env.MAINTAIN }}/docker-compose.yml up -d

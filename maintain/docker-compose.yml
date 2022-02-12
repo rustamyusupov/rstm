@@ -5,7 +5,7 @@ services:
     image: rustamyusupov/rstm
     restart: always
     volumes:
-      - ./db.json:/usr/src/app/db.json
+      - ~/data/db.json:/usr/src/app/db.json
 
   nginx:
     image: umputun/nginx-le:latest
@@ -14,8 +14,8 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - ./etc/ssl:/etc/nginx/ssl
-      - ./nginx.conf:/etc/nginx/service.conf
+      - ~/maintain/ssl:/etc/nginx/ssl
+      - ~/maintain/nginx.conf:/etc/nginx/service.conf
     environment:
       - TZ=GMT
       - LETSENCRYPT=true
