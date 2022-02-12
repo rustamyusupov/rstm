@@ -15,7 +15,6 @@ WORKDIR /usr/src/app
 COPY --from=BUILD /usr/src/app/bin ./bin
 COPY --from=BUILD /usr/src/app/node_modules ./node_modules
 COPY --from=BUILD /usr/src/app/src ./src
-COPY --from=BUILD /usr/src/app/db.json ./db.json
 
 EXPOSE 3000
 

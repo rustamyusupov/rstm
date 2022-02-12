@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - master
+      - 'master'
 
 jobs:
   build:
@@ -21,3 +21,29 @@ jobs:
         with:
           push: true
           tags: rustamyusupov/rstm:latest
+      - uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: 'maintain/.'
+          target: '.'
+          strip_components: 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            docker rm -vf $(docker ps -aq)
+            docker rmi -f $(docker images -aq)
+            docker system prune --volumes -af
+            docker-compose up -d
