@@ -1,7 +1,7 @@
 const express = require('express');
 
-const index = require('./main');
-const wishes = require('./wishes');
+const index = require('../controllers');
+const wishes = require('../controllers/wishes');
 
 const router = express.Router();
 
