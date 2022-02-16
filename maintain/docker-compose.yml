@@ -5,7 +5,7 @@ services:
     image: rustamyusupov/rstm
     restart: always
     volumes:
-      - ~/data/db.json:/usr/src/app/db.json
+      - ~/data/db.json:/usr/src/app/src/db.json
 
   nginx:
     image: umputun/nginx-le:latest
