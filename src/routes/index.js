@@ -6,6 +6,6 @@ const wishes = require('../controllers/wishes');
 const router = express.Router();
 
 router.get('/', index);
-router.get('/wishes', wishes);
+router.get('/wishes', wishes.list);
 
 module.exports = router;

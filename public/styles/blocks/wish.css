@@ -1,0 +1,39 @@
+.wish {
+  position: relative;
+  padding-left: 20px;
+  max-width: 70ch;
+}
+
+.wish:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.wish--bought,
+.wish--presented > .link {
+  color: var(--color-black);
+  text-decoration: line-through;
+}
+
+.wish__cog {
+  background-color: unset;
+  border: unset;
+  color: unset;
+  cursor: pointer;
+  left: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.not-touch .wish:hover .wish__cog {
+  opacity: 1;
+}
+
+.not-touch .wish__cog {
+  opacity: 0;
+}
+
+.wish__link {
+  color: var(--color-blue-medium);
+}
