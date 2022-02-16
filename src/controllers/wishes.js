@@ -28,7 +28,7 @@ const getCategories = data => {
 
   const categories = data.map(({ name, wishes }) => ({
     name,
-    wishes: wishes?.filter(notHidden).map(getPrice),
+    wishes: wishes.filter(notHidden).map(getPrice),
   }));
 
   return categories;
