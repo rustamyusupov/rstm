@@ -45,7 +45,9 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            docker-compose stop
+            docker-compose down
+            docker rm -vf $(docker ps -aq)
+            docker rmi -f $(docker images -aq)
             docker system prune --volumes -af
             EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} \
               docker-compose -f ${{ env.MAINTAIN }}/docker-compose.yml up -d
