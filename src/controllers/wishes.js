@@ -22,10 +22,6 @@ const notHidden = ({ statuses: s }) =>
   hiddenStatuses.filter(v => s.includes(v)).length === 0;
 
 const getCategories = data => {
-  if (!data.length) {
-    return [];
-  }
-
   const categories = data.map(({ name, wishes }) => ({
     name,
     wishes: wishes.filter(notHidden).map(getPrice),
@@ -34,15 +30,15 @@ const getCategories = data => {
   return categories;
 };
 
-const list = (req, res) => {
-  wishes.list(data => {
-    const categories = getCategories(data);
+const list = async (req, res) => {
+  const data = await wishes.list();
+  console.log(data);
+  const categories = data && data.length ? getCategories(data) : [];
 
-    res.render('wishes', {
-      title: 'Rustam | Wishes',
-      description: 'A little bit of my wishes',
-      categories,
-    });
+  res.render('wishes', {
+    title: 'Rustam | Wishes',
+    description: 'A little bit of my wishes',
+    categories,
   });
 };
 
