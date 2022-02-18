@@ -32,7 +32,6 @@ const getCategories = data => {
 
 const list = async (req, res) => {
   const data = await wishes.list();
-  console.log(data);
   const categories = data && data.length ? getCategories(data) : [];
 
   res.render('wishes', {

@@ -1,4 +1,4 @@
-FROM node:17-alpine3.14 AS BUILD
+FROM node:17-alpine AS BUILD
 
 WORKDIR /usr/src/app
 
@@ -8,7 +8,7 @@ RUN npm install
 RUN npm prune --production
 
 
-FROM node:12-alpine
+FROM node:17-alpine
 
 WORKDIR /usr/src/app
 
