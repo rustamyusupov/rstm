@@ -1,13 +1,13 @@
 doctype html
 html.page(lang="en")
   head
-    meta(charset="UTF-8")
     title=title
+    meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width")
     meta(name="description" content=description)
     link(rel="icon" type="image/svg+xml" href="icons/favicon.svg")
     link(rel="stylesheet" href="styles/styles.css")
+    script(defer type="module" src="scripts/index.js")
   body.page__body
     block content
   
-    script(type="module" src="scripts/index.js")
