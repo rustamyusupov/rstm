@@ -26,12 +26,22 @@
   transform: translateY(-50%);
 }
 
+.not-touch .wish--active-cog > .wish__cog,
 .not-touch .wish:hover .wish__cog {
   opacity: 1;
 }
 
 .not-touch .wish__cog {
   opacity: 0;
+}
+
+.wish__icon {
+  transform: rotate(0);
+  transition: transform 0.2s linear, opacity 0.1s linear;
+}
+
+.wish--active-cog .wish__icon {
+  transform: rotate(90deg);
 }
 
 .wish__link {
