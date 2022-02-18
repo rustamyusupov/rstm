@@ -21,18 +21,15 @@ const getPrice = ({ price, currency, ...rest }) => ({
 const notHidden = ({ statuses: s }) =>
   hiddenStatuses.filter(v => s.includes(v)).length === 0;
 
-const getCategories = data => {
-  const categories = data.map(({ name, wishes }) => ({
+const getCategories = (data = []) =>
+  data.map(({ name, wishes }) => ({
     name,
     wishes: wishes.filter(notHidden).map(getPrice),
   }));
 
-  return categories;
-};
-
 const list = async (req, res) => {
   const data = await wishes.list();
-  const categories = data && data.length ? getCategories(data) : [];
+  const categories = getCategories(data);
 
   res.render('wishes', {
     title: 'Rustam | Wishes',
