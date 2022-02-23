@@ -40,4 +40,14 @@ const list = async (req, res) => {
   });
 };
 
-module.exports = { list };
+const item = async (req, res) => {
+  const data = await wishes.item(req.params.id);
+
+  res.render('wish', {
+    title: 'Rustam | Wish',
+    description: 'A little bit of my wish',
+    data,
+  });
+};
+
+module.exports = { list, item };
