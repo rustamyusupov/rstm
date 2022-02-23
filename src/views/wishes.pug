@@ -12,7 +12,7 @@ block content
           each wish in category.wishes 
             li.wish(class= wish.statuses.map(s => `wish--${s}`).join(" "))
               button.wish__cog(type="button")
-                img.wish__icon(src="icons/settings.svg" width="14" height="14" alt="Icon Settings")
+                img.wish__icon(src="icons/settings.svg" width="16" height="16" alt="Icon Settings")
               a.wish__link(href=wish.link target="_blank" rel="nofollow noopener")= wish.name
               |  – 
               span= wish.price
