@@ -9,8 +9,6 @@
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
   outline: none;
 }
 
@@ -18,6 +16,16 @@ img,
 svg {
   display: block;
   max-width: 100%;
+}
+
+input,
+button,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 ul {
