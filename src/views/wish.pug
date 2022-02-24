@@ -1,7 +1,21 @@
 extends blocks/page
 
-block head
-  script(defer type="module" src="/scripts/wish.js")
-
 block content
   main.main
+    form(action="" method="post")
+      input(type="text" name="name" id="name" value= item.name placeholder="Description" required)
+      input(type="url" name="link" id="link" value= item.link placeholder="Link" required)
+      input(type="number" name="price" id="price" value= item.price placeholder="Price" required)
+      select(name="currency" id="currency" required)
+        each currency in currencies
+          option(value=currency.id selected= currency.id === item.currencyId)= currency.name
+      select(name="category" id="category" required)
+        each category in categories
+          option(value=category.id selected= category.id === item.categoryId)= category.name
+      label
+        | Archive
+        input(type="checkbox" name="archive" id="archive" checked= item.archive)
+      button(type="submit")
+        | Save
+      button(type="button")
+        | Delete
