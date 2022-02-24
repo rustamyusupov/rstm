@@ -1,4 +1,5 @@
 extends blocks/page
+include blocks/link
 
 block head
   script(defer type="module" src="/scripts/wishes.js")
@@ -11,8 +12,8 @@ block content
         ul
           each wish in category.wishes 
             li.wishes__item(class= wish.statuses.map(s => `wishes__item--${s}`).join(" "))
-              button.wishes__cog(type="button")
+              a.wishes__cog(href='/wishes/' + wish.id)
                 img.wishes__icon(src="icons/settings.svg" width="16" height="16" alt="Icon Settings")
-              a.wishes__link(href=wish.link target="_blank" rel="nofollow noopener")= wish.name
+              +link(wish.link, wish.name)
               |  – 
               span= wish.price
