@@ -1,40 +1,30 @@
 .button {
-  -webkit-tap-highlight-color: transparent;
   align-items: center;
   background-color: transparent;
   border-radius: 4px;
   border: 0px;
-  color: rgb(25, 118, 210);
+  color: var(--color-blue);
   cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
+  min-height: 36px;
   min-width: 64px;
   padding: 6px 8px;
-  position: relative;
-  text-decoration: none;
   text-transform: uppercase;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  user-select: none;
-  vertical-align: middle;
 }
 
 .button:hover {
-  background-color: rgba(25, 118, 210, 0.04);
+  background-color: var(--color-blue-lighter);
 }
 
 .button--outlined {
-  border: 1px solid rgba(25, 118, 210, 0.5);
+  border: 1px solid var(--color-blue-light);
   padding: 5px 15px;
 }
 
 .button--error {
-  border-color: rgba(211, 47, 47, 0.5);
-  color: rgb(211, 47, 47);
+  border-color: var(--color-red-light);
+  color: var(--color-red);
 }
 
 .button--error:hover {
-  background-color: rgba(211, 47, 47, 0.04);
+  background-color: var(--color-red-lighter);
 }

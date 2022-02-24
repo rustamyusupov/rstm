@@ -23,6 +23,7 @@ block content
         type="number"
         name="price"
         id="price"
+        min="0"
         value= item.price
         placeholder="Price"
         required
@@ -34,7 +35,12 @@ block content
         each category in categories
           option(value=category.id selected= category.id === item.categoryId)= category.name
       label.wish__archive
-        input.form-control(type="checkbox" name="archive" id="archive" checked= item.archive)
+        input.form-control.wish__archive-field(
+          type="checkbox"
+          name="archive"
+          id="archive"
+          checked= item.archive
+        )
         | Archive
       div.wish__action
         button.button.button--outlined(type="submit")

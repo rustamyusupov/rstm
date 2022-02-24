@@ -6,10 +6,8 @@
 }
 
 .wish__field {
-  height: 36px;
   margin-bottom: 10px;
   margin-right: 5px;
-  padding: 6px 12px;
 }
 
 .wish__name {
@@ -17,29 +15,33 @@
 }
 
 .wish__link {
-  width: 45%;
+  width: 40%;
 }
 
 .wish__price {
-  width: 100px;
+  width: 105px;
 }
 
 .wish__currency {
-  width: 80px;
+  width: 82px;
 }
 
 .wish__category {
-  width: 110px;
+  margin-right: 15px;
+  width: 130px;
 }
 
 .wish__archive {
   align-items: center;
   align-self: flex-start;
   display: flex;
-  height: 36px;
   justify-content: space-between;
-  margin-left: 15px;
-  width: 70px;
+  width: 75px;
+}
+
+.wish__archive-field {
+  padding: 0;
+  width: 16px;
 }
 
 .wish__action {
