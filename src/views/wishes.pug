@@ -10,7 +10,12 @@ block content
           each wish in category.wishes 
             li.wishes__item
               a.wishes__cog(href='/wishes/' + wish.id)
-                img.wishes__icon(src="icons/settings.svg" width="16" height="16" alt="Icon Settings")
+                img.wishes__icon(
+                  src="/icons/settings.svg"
+                  width="16"
+                  height="16"
+                  alt="Icon Settings"
+                )
               +link(wish.link, wish.name)
               |  – 
               span= wish.price

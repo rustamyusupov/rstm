@@ -44,4 +44,15 @@ const item = async (req, res) => {
   });
 };
 
-module.exports = { list, item };
+const update = async (req, res) => {
+  const data = {
+    ...req.body,
+    categoryId: parseInt(req.body?.categoryId, 10),
+    currencyId: parseInt(req.body?.currencyId, 10),
+  };
+  await wish.update(req.params.id, data);
+
+  res.redirect('/wishes');
+};
+
+module.exports = { list, item, update };
