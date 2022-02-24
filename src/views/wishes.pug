@@ -1,9 +1,6 @@
 extends blocks/page
 include blocks/link
 
-block head
-  script(defer type="module" src="/scripts/wishes.js")
-
 block content
   main.main
     each category in categories
