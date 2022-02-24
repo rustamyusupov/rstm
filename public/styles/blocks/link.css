@@ -1,7 +1,8 @@
 .link {
   margin: 0px;
   color: var(--color-blue);
-  text-decoration: underline var(--color-blue-light);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-blue-light);
 }
 
 .link:hover {
