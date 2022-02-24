@@ -1,3 +1,9 @@
 .link {
-  color: var(--color-blue-medium);
+  margin: 0px;
+  color: var(--color-blue);
+  text-decoration: underline var(--color-blue-light);
+}
+
+.link:hover {
+  text-decoration-color: inherit;
 }

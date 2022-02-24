@@ -9,9 +9,6 @@
 
 :root {
   --color-black: #000;
-  --color-blue-medium: #0f62fe;
-  --color-gray-lighter: #f5f5f5;
-  --color-gray-light: #ccc;
-  --color-gray-medium: #b5b5b5;
-  --color-yellow-light: #fffeee;
+  --color-blue-light: #a3c8ed;
+  --color-blue: #1976d2;
 }
