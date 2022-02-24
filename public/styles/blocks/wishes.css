@@ -16,12 +16,6 @@
   margin-bottom: 10px;
 }
 
-.wishes__item--bought,
-.wishes__item--presented > .link {
-  color: var(--color-black);
-  text-decoration: line-through;
-}
-
 .wishes__cog {
   background-color: unset;
   border: unset;
