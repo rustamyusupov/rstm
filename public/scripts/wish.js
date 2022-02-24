@@ -1,3 +1,10 @@
+import request from './request.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('wish');
+  const button = document.querySelector('#delete');
+
+  button.addEventListener('click', () => {
+    request(location.pathname, { method: 'delete' });
+    window.location = '/wishes';
+  });
 });

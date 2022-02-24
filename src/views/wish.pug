@@ -1,5 +1,8 @@
 extends blocks/page
 
+block head 
+  script(defer type="module" src="/scripts/wish.js")
+
 block content
   main.main
     form.wish(action="" method="post")
@@ -45,5 +48,5 @@ block content
       div.wish__action
         button.button.button--outlined(type="submit")
           | Save
-        button.button.button--error(type="button")
+        button#delete.button.button--error(type="button")
           | Delete

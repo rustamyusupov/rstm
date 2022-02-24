@@ -55,4 +55,10 @@ const update = async (req, res) => {
   res.redirect('/wishes');
 };
 
-module.exports = { list, item, update };
+const remove = async (req, res) => {
+  await wish.delete(req.params.id);
+
+  res.send({});
+};
+
+module.exports = { list, item, update, remove };
