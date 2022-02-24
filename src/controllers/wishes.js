@@ -49,6 +49,7 @@ const update = async (req, res) => {
     ...req.body,
     categoryId: parseInt(req.body?.categoryId, 10),
     currencyId: parseInt(req.body?.currencyId, 10),
+    archive: req.body?.archive === 'on',
   };
   await wish.update(req.params.id, data);
 
