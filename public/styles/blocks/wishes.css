@@ -45,7 +45,3 @@
 .wishes__icon {
   transition: opacity 0.2s linear;
 }
-
-.wishes__link {
-  color: var(--color-blue-medium);
-}
