@@ -2,29 +2,26 @@ const category = require('../models/category');
 const currency = require('../models/currency');
 const wish = require('../models/wish');
 
-const getPrice =
-  currencies =>
-  ({ price, currencyId, ...rest }) => ({
-    price: Math.ceil(price).toLocaleString('ru', {
-      style: 'currency',
-      currency: currencies.find(({ id }) => id === currencyId)?.name,
-      maximumFractionDigits: 0,
-    }),
-    ...rest,
-  });
+const getPrice = props => ({
+  ...props,
+  price: Math.ceil(props.price).toLocaleString('ru', {
+    style: 'currency',
+    currency: props.currency,
+    maximumFractionDigits: 0,
+  }),
+});
 
-const getCategories = (data, currencies) =>
+const getCategories = data =>
   data
     .filter(category => Array.isArray(category.wishes))
     .map(({ name, wishes }) => ({
       name,
-      wishes: wishes.filter(w => !w.archive).map(getPrice(currencies)),
+      wishes: wishes.filter(w => !w.archive).map(getPrice),
     }));
 
 const list = async (req, res) => {
   const data = await wish.list();
-  const currencies = await currency.list();
-  const categories = Array.isArray(data) ? getCategories(data, currencies) : [];
+  const categories = Array.isArray(data) ? getCategories(data) : [];
 
   res.render('wishes', {
     title: 'Rustam | Wishes',
