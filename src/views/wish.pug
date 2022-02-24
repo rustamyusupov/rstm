@@ -2,20 +2,42 @@ extends blocks/page
 
 block content
   main.main
-    form(action="" method="post")
-      input(type="text" name="name" id="name" value= item.name placeholder="Description" required)
-      input(type="url" name="link" id="link" value= item.link placeholder="Link" required)
-      input(type="number" name="price" id="price" value= item.price placeholder="Price" required)
-      select(name="currency" id="currency" required)
+    form.wish(action="" method="post")
+      input.form-control.wish__field.wish__name(
+        type="text"
+        name="name"
+        id="name"
+        value= item.name
+        placeholder="Description"
+        required
+      )
+      input.form-control.wish__field.wish__link(
+        type="url"
+        name="link"
+        id="link"
+        value= item.link
+        placeholder="Link"
+        required
+      )
+      input.form-control.wish__field.wish__price(
+        type="number"
+        name="price"
+        id="price"
+        value= item.price
+        placeholder="Price"
+        required
+      )
+      select.form-control.wish__field.wish__currency(name="currency" id="currency" required)
         each currency in currencies
           option(value=currency.id selected= currency.id === item.currencyId)= currency.name
-      select(name="category" id="category" required)
+      select.form-control.wish__field.wish__category(name="category" id="category" required)
         each category in categories
           option(value=category.id selected= category.id === item.categoryId)= category.name
-      label
+      label.wish__archive
+        input.form-control(type="checkbox" name="archive" id="archive" checked= item.archive)
         | Archive
-        input(type="checkbox" name="archive" id="archive" checked= item.archive)
-      button(type="submit")
-        | Save
-      button(type="button")
-        | Delete
+      div.wish__action
+        button.button.button--outlined(type="submit")
+          | Save
+        button.button.button--error(type="button")
+          | Delete

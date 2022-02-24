@@ -7,9 +7,9 @@
 }
 
 .wishes__item {
-  position: relative;
-  padding-left: 20px;
   max-width: 70ch;
+  padding-left: 20px;
+  position: relative;
 }
 
 .wishes__item:not(:last-child) {

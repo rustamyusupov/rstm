@@ -1,10 +1,17 @@
 @import 'blocks/base.css';
+@import 'blocks/button.css';
+@import 'blocks/form-control.css';
 @import 'blocks/link.css';
 @import 'blocks/main.css';
 @import 'blocks/page.css';
+@import 'blocks/wish.css';
 @import 'blocks/wishes.css';
 
 :root {
   --color-black: #000;
   --color-blue-medium: #0f62fe;
+  --color-gray-lighter: #f5f5f5;
+  --color-gray-light: #ccc;
+  --color-gray-medium: #b5b5b5;
+  --color-yellow-light: #fffeee;
 }
