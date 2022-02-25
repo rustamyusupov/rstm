@@ -14,5 +14,6 @@ module.exports = {
     }));
   },
   item: id => request(`/api/wishes/${id}`),
+  add: data => request('/api/wishes', { method: 'post', data }),
   update: (id, data) => request(`/api/wishes/${id}`, { method: 'put', data }),
 };

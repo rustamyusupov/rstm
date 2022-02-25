@@ -2,9 +2,23 @@
   margin-bottom: 20px;
 }
 
+.wishes__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .wishes__title {
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-right: 6px;
+}
+
+.not-touch .wishes__add:hover {
+  opacity: 1;
+}
+
+.not-touch .wishes__add {
+  opacity: 0;
 }
 
 .wishes__item {
