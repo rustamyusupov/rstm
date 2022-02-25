@@ -36,7 +36,3 @@
 .not-touch .wishes__cog {
   opacity: 0;
 }
-
-.wishes__icon {
-  transition: opacity 0.2s linear;
-}
