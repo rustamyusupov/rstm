@@ -4,11 +4,12 @@ include blocks/link
 
 block content
   main.main
+    div.wishes__header
+      h1.wishes__title Wishlist
+      +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
     each category in categories
       section.wishes
-        div.wishes__header
-          h4.wishes__title= category.name
-          +iconLink('/wishes/add', 'add.svg', "Settings")(class="wishes__add")
+        h4.wishes__category-title= category.name
         ul
           each wish in category.wishes 
             li.wishes__item

@@ -1,4 +1,4 @@
-mixin iconLink(href, icon, alt, external)
+mixin iconLink(href, icon, width=16, height=16, alt, external)
   a(
     href=href
     target=(external ? "_blank" : "")
@@ -6,7 +6,7 @@ mixin iconLink(href, icon, alt, external)
   )&attributes(attributes)
     img.icon(
       src="/icons/" + icon
-      width="16"
-      height="16"
+      width=width
+      height=height
       alt=alt
     )
