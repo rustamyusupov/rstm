@@ -11,11 +11,25 @@
 }
 
 .wish__name {
+  margin-right: 0;
   width: 100%;
 }
 
+.wish__container {
+  flex: 1;
+  position: relative;
+}
+
 .wish__link {
-  width: 40%;
+  padding-right: 35px;
+}
+
+.wish__icon-link {
+  height: 16px;
+  position: absolute;
+  right: 8px;
+  top: 16px;
+  width: 16px;
 }
 
 .wish__price {

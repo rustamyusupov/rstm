@@ -1,4 +1,5 @@
 extends blocks/page
+include blocks/iconLink
 
 block head 
   script(defer type="module" src="/scripts/wish.js")
@@ -14,14 +15,16 @@ block content
         placeholder="Description"
         required
       )
-      input.form-control.wish__field.wish__link(
-        type="url"
-        name="link"
-        id="link"
-        value= item.link
-        placeholder="Link"
-        required
-      )
+      div.wish__field.wish__container
+        input.form-control.wish__link(
+          type="url"
+          name="link"
+          id="link"
+          value= item.link
+          placeholder="Link"
+          required
+        )
+        +iconLink(item.link, 'open-in-new.svg', "Icon Open In New", true)(class="wish__icon-link")
       input.form-control.wish__field.wish__price(
         type="number"
         name="price"
