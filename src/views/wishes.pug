@@ -9,20 +9,15 @@ block content
   main.main
     div.wishes__header
       h1.wishes__title Wishlist
-      button#visibility.button.wishes__visibility(type="checkbox")
-        img.icon(
-          src="/icons/visibility.svg"
-          width=24
-          height=24
-          alt="Visibility"
-        )
+      input#visibility.wishes__checkbox(type="checkbox")
+      label.wishes__visibility(for="visibility")
       +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
     each category in categories
       section.wishes
         h4.wishes__category-title= category.name
         ul
           each wish in category.wishes 
-            li.wishes__item
+            li.wishes__item(class=(wish.archive ? 'wishes__item--archive' : ''))
               +iconLink('/wishes/' + wish.id, 'settings.svg', "Settings")(class="wishes__cog")
               +link(wish.link, wish.name)
               |  – 

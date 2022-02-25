@@ -14,7 +14,30 @@
 }
 
 .wishes__visibility {
+  height: 24px;
   margin-right: 5px;
+  position: relative;
+  width: 24px;
+}
+
+.wishes__visibility:before {
+  background-image: url('/icons/visibility-off.svg');
+  content: '';
+  cursor: pointer;
+  height: 24px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+}
+
+.wishes__checkbox {
+  display: none;
+}
+
+.wishes__checkbox:checked + .wishes__visibility:before {
+  background-image: url('/icons/visibility.svg');
 }
 
 .wishes__category-title {
@@ -30,6 +53,10 @@
 
 .wishes__item:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.wishes__item--archive > .link {
+  color: var(--color-black);
 }
 
 .wishes__cog {

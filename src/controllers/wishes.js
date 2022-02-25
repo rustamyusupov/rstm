@@ -16,7 +16,7 @@ const getCategories = data =>
     .filter(category => Array.isArray(category.wishes))
     .map(({ name, wishes }) => ({
       name,
-      wishes: wishes.filter(w => !w.archive).map(getPrice),
+      wishes: wishes.map(getPrice),
     }));
 
 const getNumber = value => parseInt(value, 10);
