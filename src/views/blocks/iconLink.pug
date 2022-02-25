@@ -1,0 +1,12 @@
+mixin iconLink(href, icon, alt, external)
+  a(
+    href=href
+    target=(external ? "_blank" : "")
+    rel=(external ? "nofollow noopener" : "")
+  )&attributes(attributes)
+    img.icon(
+      src="/icons/" + icon
+      width="16"
+      height="16"
+      alt=alt
+    )
