@@ -9,6 +9,5 @@ router.get('/', index);
 router.get('/wishes', wishes.list);
 router.get('/wishes/:id', wishes.item);
 router.post('/wishes/:id', wishes.update);
-router.delete('/wishes/:id', wishes.remove);
 
 module.exports = router;

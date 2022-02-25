@@ -15,5 +15,4 @@ module.exports = {
   },
   item: id => request(`/api/wishes/${id}`),
   update: (id, data) => request(`/api/wishes/${id}`, { method: 'put', data }),
-  delete: id => request(`/api/wishes/${id}`, { method: 'delete' }),
 };

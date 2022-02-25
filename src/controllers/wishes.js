@@ -19,6 +19,8 @@ const getCategories = data =>
       wishes: wishes.filter(w => !w.archive).map(getPrice),
     }));
 
+const getNumber = value => parseInt(value, 10);
+
 const list = async (req, res) => {
   const data = await wish.list();
   const categories = Array.isArray(data) ? getCategories(data) : [];
@@ -47,8 +49,9 @@ const item = async (req, res) => {
 const update = async (req, res) => {
   const data = {
     ...req.body,
-    categoryId: parseInt(req.body?.categoryId, 10),
-    currencyId: parseInt(req.body?.currencyId, 10),
+    categoryId: getNumber(req.body?.categoryId),
+    currencyId: getNumber(req.body?.currencyId),
+    price: getNumber(req.body?.price),
     archive: req.body?.archive === 'on',
   };
   await wish.update(req.params.id, data);
@@ -56,10 +59,4 @@ const update = async (req, res) => {
   res.redirect('/wishes');
 };
 
-const remove = async (req, res) => {
-  await wish.delete(req.params.id);
-
-  res.send({});
-};
-
-module.exports = { list, item, update, remove };
+module.exports = { list, item, update };
