@@ -2,10 +2,20 @@ extends blocks/page
 include blocks/iconLink
 include blocks/link
 
+block head 
+  script(defer type="module" src="/scripts/wishes.js")
+
 block content
   main.main
     div.wishes__header
       h1.wishes__title Wishlist
+      button#visibility.button.wishes__visibility(type="checkbox")
+        img.icon(
+          src="/icons/visibility.svg"
+          width=24
+          height=24
+          alt="Visibility"
+        )
       +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
     each category in categories
       section.wishes

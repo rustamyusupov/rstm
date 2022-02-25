@@ -10,19 +10,16 @@
 
 .wishes__title {
   font-size: 24px;
-  margin-right: 6px;
+  margin-right: 10px;
+}
+
+.wishes__visibility {
+  margin-right: 5px;
 }
 
 .wishes__category-title {
   font-weight: 500;
-}
-
-.not-touch .wishes__add:hover {
-  opacity: 1;
-}
-
-.not-touch .wishes__add {
-  opacity: 0;
+  margin-bottom: 10px;
 }
 
 .wishes__item {
@@ -47,10 +44,14 @@
   transform: translateY(-50%);
 }
 
+.not-touch .wishes__visibility:hover,
+.not-touch .wishes__add:hover,
 .not-touch .wishes__item:hover .wishes__cog {
   opacity: 1;
 }
 
+.not-touch .wishes__visibility,
+.not-touch .wishes__add,
 .not-touch .wishes__cog {
   opacity: 0;
 }
