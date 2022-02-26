@@ -2,6 +2,8 @@ const category = require('../models/category');
 const currency = require('../models/currency');
 const wish = require('../models/wish');
 
+const sort = (a, b) => b.sort - a.sort;
+
 const getPrice = props => ({
   ...props,
   price: Math.ceil(props.price).toLocaleString('ru', {
@@ -16,7 +18,7 @@ const getCategories = data =>
     .filter(category => Array.isArray(category.wishes))
     .map(({ name, wishes }) => ({
       name,
-      wishes: wishes.map(getPrice),
+      wishes: wishes.sort(sort).map(getPrice),
     }));
 
 const getNumber = value => parseInt(value, 10);
@@ -26,6 +28,7 @@ const getData = body => ({
   categoryId: getNumber(body?.categoryId),
   currencyId: getNumber(body?.currencyId),
   price: getNumber(body?.price),
+  sort: getNumber(body?.sort),
   archive: body?.archive === 'on',
 });
 

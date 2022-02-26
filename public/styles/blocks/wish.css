@@ -41,8 +41,11 @@
 }
 
 .wish__category {
-  margin-right: 15px;
   width: 130px;
+}
+
+.wish__sort {
+  width: 75px;
 }
 
 .wish__archive {
@@ -50,6 +53,7 @@
   align-self: flex-start;
   display: flex;
   justify-content: space-between;
+  margin-left: 15px;
   width: 75px;
 }
 
