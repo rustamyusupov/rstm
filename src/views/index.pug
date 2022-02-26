@@ -1,6 +1,27 @@
 extends blocks/page
+include blocks/link
 
 block content
-  main.main.main--centered
-    p under&nbsp;construction
-
+  main.main
+    header.main__header
+      img.main__logo(src="/images/logo.webp" width="64px" height="64px" alt="Logo")
+      h1.main__title Hi, I'm Rustam.
+      p.main__subtitle I enjoy developing apps that make our world a little better.
+    section.main__about
+      h2.main__about A few things about me
+      ul.main__list
+        li.main__list-item I'm a husband, father, engineer and sportsman.
+        li.main__list-item I live in Kaliningrad, Russia.
+        li.main__list-item I work as a senior frontend engineer at 
+          +link('https://www.linkedin.com/company/s7-techlab', 'S7 Techlab').
+        li.main__list-item On the internet, I often go by rstm.
+      h2.main__about More things about me 
+      ul.main__list
+        li.main__list-item
+          +link('https://github.com/rustamyusupov', 'GitHub')
+        li.main__list-item
+          +link('https://www.linkedin.com/in/rustamyusupov', 'LinkedIn')
+        li.main__list-item
+          +link('https://www.strava.com/athletes/20782006', 'Strava')
+        li.main__list-item
+          +link('mailto:i@rstm.me', 'Email')

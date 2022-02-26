@@ -28,8 +28,3 @@ select {
 button {
   cursor: pointer;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}

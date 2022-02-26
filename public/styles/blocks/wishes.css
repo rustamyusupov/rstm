@@ -45,6 +45,11 @@
   margin-bottom: 10px;
 }
 
+.wishes__list {
+  list-style-type: none;
+  padding: 0;
+}
+
 .wishes__item {
   max-width: 70ch;
   padding-left: 20px;
