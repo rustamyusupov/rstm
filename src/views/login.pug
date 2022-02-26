@@ -1,0 +1,24 @@
+extends blocks/page
+
+block content
+  main.login
+    h1.login__title Sign in
+    form.login__form(action="" method="post")
+      input.form-control.login__field(
+        type="text"
+        name="username"
+        id="username"
+        placeholder="username"
+        tabindex="1"
+        autofocus
+        required
+      )
+      input.form-control.login__field(
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+        tabindex="1"
+        required
+      )
+      button.button.button--outlined.login__button(type="submit") Login
