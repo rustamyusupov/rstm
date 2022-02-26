@@ -6,6 +6,7 @@
 .main__header {
   display: flex;
   flex-wrap: wrap;
+  margin-top: -10px;
 }
 
 .main__logo {
