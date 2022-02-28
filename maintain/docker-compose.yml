@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - ~/data/db.json:/usr/src/app/src/db.json
+      - ~/data/users.json:/usr/src/app/src/users.json
 
   nginx:
     image: umputun/nginx-le:latest

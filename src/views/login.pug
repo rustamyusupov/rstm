@@ -5,6 +5,7 @@ block content
     h1.login__title Sign in
     form.login__form(action="/login" method="post")
       input.form-control.login__field(
+        class=(error ? 'login__field--invalid' : '' )
         type="text"
         name="username"
         id="username"
@@ -14,6 +15,7 @@ block content
         required
       )
       input.form-control.login__field(
+        class=(error ? 'login__field--invalid' : '' )
         type="password"
         name="password"
         id="password"

@@ -10,15 +10,17 @@ block content
     div.wishes__header
       h1.wishes__title Wishlist
       input#visibility.wishes__checkbox(type="checkbox")
-      label.wishes__visibility(for="visibility")
-      +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
+      if editable
+        label.wishes__visibility(for="visibility")
+        +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
     each category in categories
       section.wishes
         h4.wishes__category-title= category.name
         ul.wishes__list
           each wish in category.wishes 
             li.wishes__item(class=(wish.archive ? 'wishes__item--archive' : ''))
-              +iconLink('/wishes/' + wish.id, 'settings.svg', "Settings")(class="wishes__cog")
+              if editable
+                +iconLink('/wishes/' + wish.id, 'settings.svg', "Settings")(class="wishes__cog")
               +link(wish.link, wish.name)
               |  – 
               span= wish.price

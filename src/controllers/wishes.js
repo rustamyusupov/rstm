@@ -35,11 +35,13 @@ const getData = body => ({
 const list = async (req, res) => {
   const data = await wish.list();
   const categories = Array.isArray(data) ? getCategories(data) : [];
+  const editable = Boolean(req.session.userId);
 
   res.render('wishes', {
     title: 'Rustam | Wishes',
     description: 'A little bit of my wishes',
     categories,
+    editable,
   });
 };
 

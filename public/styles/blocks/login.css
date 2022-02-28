@@ -21,6 +21,10 @@
   margin-bottom: 10px;
 }
 
+.login__field--invalid {
+  border-color: var(--color-red);
+}
+
 .login__button {
   margin-top: 20px;
   width: 130px;
