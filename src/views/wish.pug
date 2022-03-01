@@ -6,7 +6,7 @@ block head
 
 block content
   main
-    form.wish(action="/wishes/add" method="post")
+    form.wish(action="" method="post")
       input.form-control.wish__field.wish__name(
         type="text"
         name="name"
@@ -57,5 +57,6 @@ block content
         )
         | Archive
       div.wish__action
-        button.button.button--outlined(type="submit") Save
-        button#delete.button.button--error(type="button") Delete
+        button.button.button--outlined(type="submit")= item.name ? "Save" : "Add"
+        if item.name
+          button#delete.button.button--error(type="button") Delete
