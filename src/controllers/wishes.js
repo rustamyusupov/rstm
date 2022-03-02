@@ -47,7 +47,7 @@ const list = async (req, res) => {
 
 const item = async (req, res) => {
   const id = req.params.id;
-  const item = id !== 'add' ? await wish.item(req.params.id) : {};
+  const item = id === 'add' ? {} : await wish.item(req.params.id);
   const categories = await category.list();
   const currencies = await currency.list();
 
