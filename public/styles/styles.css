@@ -10,6 +10,7 @@
 @import 'blocks/wishes.css';
 
 :root {
+  --color-black-light: #1f2028;
   --color-black: #000;
   --color-blue-lighter: #f6fafd;
   --color-blue-light: #8cbbe9;
@@ -19,4 +20,5 @@
   --color-red-lighter: #fdf7f7;
   --color-red-light: #e99797;
   --color-red: #d32f2f;
+  --color-white: #fff;
 }
