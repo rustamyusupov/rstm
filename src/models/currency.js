@@ -1,5 +1,5 @@
-const request = require('../utils/request');
+// const request = require('../utils/request');
 
 module.exports = {
-  list: () => request('/api/currencies'),
+  list: () => [], // request('/api/currencies'),
 };
