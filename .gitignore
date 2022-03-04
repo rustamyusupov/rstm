@@ -1,5 +1,5 @@
 .DS_Store
 .vscode
 node_modules
-db.json
-users.json
+docker-compose.db.yml
+init.sql
