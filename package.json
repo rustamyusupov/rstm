@@ -11,13 +11,16 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "connect-pg-simple": "^7.0.0",
     "crypto": "^1.0.1",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "morgan": "^1.10.0",
+    "pg": "^8.7.3",
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
     "nodemon": "^2.0.15",
