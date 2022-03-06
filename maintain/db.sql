@@ -1,7 +1,11 @@
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	username TEXT NOT NULL,
-	password TEXT NOT NULL
+	email TEXT UNIQUE NOT NULL,
+	password TEXT NOT NULL,
+	reset_token TEXT,
+	reset_token_expires TEXT,
+	created_at TIMESTAMP DEFAULT now(),
+	updated_at TIMESTAMP DEFAULT now()
 );
 
 CREATE TABLE categories (
@@ -25,12 +29,22 @@ CREATE TABLE wishes (
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW(),
 
-  categories_id INTEGER NOT NULL
+  category_id INTEGER NOT NULL
   REFERENCES categories(id),
 
-  currencies_id INTEGER NOT NULL
+  currency_id INTEGER NOT NULL
   REFERENCES currencies(id)
 );
+
+CREATE TABLE session (
+  sid varchar NOT NULL COLLATE "default",
+  sess json NOT NULL,
+  expire timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE session
+ADD CONSTRAINT session_pkey
+PRIMARY KEY (sid) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$
@@ -39,6 +53,11 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
 
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON wishes
