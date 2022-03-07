@@ -1,12 +1,36 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:14.2-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - ~/data:/var/lib/postgresql/data
+      - ~/maintain/db.sql:/docker-entrypoint-initdb.d/db.sql
+      - ~/data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
   app:
     image: rustamyusupov/rstm
     restart: always
-    volumes:
-      - ~/data/db.json:/usr/src/app/src/db.json
-      - ~/data/users.json:/usr/src/app/src/users.json
+    environment:
+      - SESSION_SECRET=${SESSION_SECRET}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    networks:
+      - app-network
+    depends_on:
+      - db
 
   nginx:
     image: umputun/nginx-le:latest
@@ -24,3 +48,7 @@ services:
       - LE_FQDN=${FQDN}
     depends_on:
       - app
+
+networks:
+  app-network:
+    driver: bridge

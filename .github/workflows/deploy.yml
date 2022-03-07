@@ -50,4 +50,8 @@ jobs:
             docker rmi -f $(docker images -aq)
             docker system prune --volumes -af
             EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} \
+              DB_HOST=${{ secrets.DB_HOST }} DB_PORT=${{ secrets.DB_PORT }} \
+              DB_DATABASE=${{ secrets.DB_DATABASE }} \
+              DB_USERNAME=${{ secrets.DB_USERNAME }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              SESSION_SECRET=${{ secrets.SESSION_SECRET }} \
               docker-compose -f ${{ env.MAINTAIN }}/docker-compose.yml up -d

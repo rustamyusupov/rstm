@@ -1,5 +1,9 @@
-const request = require('../utils/request');
+const db = require('../utils/db');
 
-module.exports = {
-  list: () => request('/api/categories'),
+const getList = async () => {
+  const results = await db.query('SELECT * FROM categories');
+
+  return results.rows || [];
 };
+
+module.exports = { getList };

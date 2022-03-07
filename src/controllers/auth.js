@@ -1,44 +1,29 @@
-const crypto = require('crypto');
+const getHashedPassword = require('../utils/getHashedPassword');
+const user = require('../models/user');
 
-const users = require('../users.json');
-
-const getHashedPassword = password => {
-  const sha256 = crypto.createHash('sha256');
-  const hash = sha256.update(password).digest('base64');
-
-  return hash;
-};
-
-const login = (req, res) => {
+const index = (req, res) => {
   res.render('login', {
     title: 'Rustam',
     description: 'Authentication',
   });
 };
 
-const signin = (req, res) => {
-  const { username, password } = req.body;
+const signin = async (req, res) => {
+  const { email, password } = req.body;
   const hashedPassword = getHashedPassword(password);
+  const u = await user.getItem(email);
 
-  req.session.userId = '';
+  if (u?.password === hashedPassword) {
+    req.session.user = u;
 
-  const user = users.find(
-    u => u.username === username && u.password === hashedPassword
-  );
-
-  if (user) {
-    req.session.userId = user.id;
-    console.log(req.session.userId, user.id);
-    res.redirect('/wishes');
-
-    return;
+    return res.redirect('wishes');
   }
 
-  res.render('login', {
+  return res.render('login', {
     title: 'Rustam',
     description: 'Authentication',
-    error: true,
+    error: 'Wrong email or password. Try again.',
   });
 };
 
-module.exports = { login, signin };
+module.exports = { index, signin };
