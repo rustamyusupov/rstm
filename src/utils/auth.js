@@ -3,8 +3,6 @@ const auth = (req, res, next) => {
     return res.redirect('/login');
   }
 
-  res.locals.user = req.session.user; // ?
-
   return next();
 };
 

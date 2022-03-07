@@ -2,8 +2,6 @@ CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	email TEXT UNIQUE NOT NULL,
 	password TEXT NOT NULL,
-	reset_token TEXT,
-	reset_token_expires TEXT,
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP DEFAULT now()
 );

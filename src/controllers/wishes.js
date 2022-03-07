@@ -3,7 +3,7 @@ const category = require('../models/category');
 const currency = require('../models/currency');
 
 const index = async (req, res) => {
-  const isAuth = Boolean(req.session?.user?.id); // ?
+  const isAuth = Boolean(req.session?.user?.id);
   const categories = await wish.getList(isAuth);
 
   res.render('wishes', {
