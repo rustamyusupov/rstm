@@ -1,4 +1,4 @@
-const db = require('../configs/db');
+const db = require('../utils/db');
 
 const getItem = async email => {
   const query = `SELECT * FROM users WHERE email = '${email}'`;

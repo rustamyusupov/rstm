@@ -1,4 +1,4 @@
-const db = require('../configs/db');
+const db = require('../utils/db');
 const category = require('../models/category');
 const currency = require('../models/currency');
 

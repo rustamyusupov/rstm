@@ -3,7 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 
-const session = require('./configs/session');
+const session = require('./utils/session');
 const routes = require('./routes');
 
 const publicPath = path.join(__dirname, '..', '/public');
