@@ -9,8 +9,8 @@ block content
   main
     div.wishes__header
       h1.wishes__title Wishlist
-      input#visibility.wishes__checkbox(type="checkbox")
       if editable
+        input#visibility.wishes__checkbox(type="checkbox")
         label.wishes__visibility(for="visibility")
         +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Settings")(class="wishes__add")
     each category in categories
