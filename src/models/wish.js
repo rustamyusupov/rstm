@@ -11,18 +11,18 @@ const sort = (a, b) => b.sort - a.sort;
 
 const getCurrency =
   currencies =>
-  ({ currency_id, ...wish }) => ({
+  ({ currency_id, ...rest }) => ({
     currency: currencies.find(({ id }) => currency_id === id)?.name,
-    ...wish,
+    ...rest,
   });
 
-const getPrice = ({ price, currency, ...wish }) => ({
+const getPrice = ({ price, currency, ...rest }) => ({
   price: Math.ceil(price).toLocaleString('ru', {
     style: 'currency',
     currency: currency,
     maximumFractionDigits: 0,
   }),
-  ...wish,
+  ...rest,
 });
 
 const getArchive = wish => ({
@@ -30,27 +30,27 @@ const getArchive = wish => ({
   archive: wish.archive === 'on',
 });
 
-const list = async archive => {
-  const categories = await category.list();
-  const currencies = await currency.list();
+const getList = async archive => {
+  const categories = await category.getList();
+  const currencies = await currency.getList();
   const query = `SELECT * FROM wishes ${
     archive ? '' : 'WHERE archive = false'
   }`;
   const wishes = await db.query(query);
 
-  const result = categories.map(({ id, ...category }) => ({
+  const result = categories.map(({ id, ...rest }) => ({
     wishes: wishes.rows
       ?.filter(filterByCategory(id))
       .sort(sort)
       .map(getCurrency(currencies))
       .map(getPrice),
-    ...category,
+    ...rest,
   }));
 
   return Array.isArray(result) ? result : [];
 };
 
-const item = async id => {
+const getItem = async id => {
   if (id === 'add') {
     return {};
   }
@@ -61,7 +61,7 @@ const item = async id => {
   return result.rows?.[0];
 };
 
-const update = async (id, body) => {
+const updateItem = async (id, body) => {
   const data = getArchive(body);
   const values = Object.entries(data)
     .map(([name, value]) => `${name}='${value}'`)
@@ -72,7 +72,7 @@ const update = async (id, body) => {
   return result.rows?.[0];
 };
 
-const add = async body => {
+const addItem = async body => {
   const data = getArchive(body);
   const columns = Object.keys(data).join(',');
   const values = Object.values(data)
@@ -84,11 +84,11 @@ const add = async body => {
   return result.rows?.[0];
 };
 
-const remove = async id => {
+const deleteItem = async id => {
   const query = `DELETE FROM wishes WHERE id = ${id}`;
   const result = await db.query(query);
 
   return result;
 };
 
-module.exports = { list, item, update, add, remove };
+module.exports = { getList, getItem, updateItem, addItem, deleteItem };

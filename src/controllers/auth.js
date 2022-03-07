@@ -11,7 +11,7 @@ const index = (req, res) => {
 const signin = async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = getHashedPassword(password);
-  const u = await user.item(email);
+  const u = await user.getItem(email);
 
   if (u?.password === hashedPassword) {
     req.session.user = u;
