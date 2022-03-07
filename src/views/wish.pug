@@ -34,12 +34,12 @@ block content
         placeholder="Price"
         required
       )
-      select.form-control.wish__field.wish__currency(name="currencyId" id="currency" required)
+      select.form-control.wish__field.wish__currency(name="currency_id" id="currency" required)
         each currency in currencies
-          option(value=currency.id selected= currency.id === item.currencyId)= currency.name
-      select.form-control.wish__field.wish__category(name="categoryId" id="category" required)
+          option(value=currency.id selected= currency.id === item.currency_id)= currency.name
+      select.form-control.wish__field.wish__category(name="category_id" id="category" required)
         each category in categories
-          option(value=category.id selected= category.id === item.categoryId)= category.name
+          option(value=category.id selected= category.id === item.category_id)= category.name
       input.form-control.wish__field.wish__sort(
         type="number"
         name="sort"

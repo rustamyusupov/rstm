@@ -1,5 +1,9 @@
-// const request = require('../utils/request');
+const db = require('../configs/db');
 
-module.exports = {
-  list: () => [], // request('/api/currencies'),
+const list = async () => {
+  const results = await db.query('SELECT * FROM currencies');
+
+  return results.rows || [];
 };
+
+module.exports = { list };

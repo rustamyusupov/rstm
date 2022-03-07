@@ -1,12 +1,17 @@
-import request from './request.js';
-
 document.addEventListener('DOMContentLoaded', () => {
+  if (location.pathname === '/wishes/add') {
+    return;
+  }
+
   const button = document.querySelector('#delete');
 
-  button.disabled = location.pathname === '/wishes/add';
-
-  button.addEventListener('click', async () => {
-    await request(`/api${location.pathname}`, { method: 'delete' });
-    window.location = '/wishes';
+  button.addEventListener('click', () => {
+    fetch(location.pathname, {
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      method: 'delete',
+    }).then(() => {
+      window.location = '/wishes';
+    });
   });
 });
