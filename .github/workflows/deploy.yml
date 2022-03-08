@@ -48,7 +48,6 @@ jobs:
             docker-compose down
             docker rm -vf $(docker ps -aq)
             docker rmi -f $(docker images -aq)
-            docker system prune --volumes -af
             EMAIL=${{ secrets.EMAIL }} FQDN=${{ secrets.FQDN }} \
               DB_HOST=${{ secrets.DB_HOST }} DB_PORT=${{ secrets.DB_PORT }} \
               DB_DATABASE=${{ secrets.DB_DATABASE }} \

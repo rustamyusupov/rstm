@@ -12,7 +12,7 @@ services:
     ports:
       - '${DB_PORT}:5432'
     volumes:
-      - ~/data:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
       - ~/maintain/db.sql:/docker-entrypoint-initdb.d/db.sql
       - ~/data/init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -48,6 +48,7 @@ services:
       - ~/maintain/nginx.conf:/etc/nginx/service.conf
     depends_on:
       - app
-# volumes:
-#   db:
-#     driver: local
+
+volumes:
+  db:
+    driver: local
