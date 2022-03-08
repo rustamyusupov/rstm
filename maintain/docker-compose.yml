@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   db:
+    container_name: db
     image: postgres:14.2-alpine
     restart: unless-stopped
     environment:
@@ -14,10 +15,9 @@ services:
       - ~/data:/var/lib/postgresql/data
       - ~/maintain/db.sql:/docker-entrypoint-initdb.d/db.sql
       - ~/data/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - app-network
 
   app:
+    container_name: app
     image: rustamyusupov/rstm
     restart: always
     environment:
@@ -27,28 +27,27 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-    networks:
-      - app-network
+    command: ./wait-for.sh db:${DB_PORT} -- node ./bin/www
     depends_on:
       - db
 
   nginx:
+    container_name: nginx
     image: umputun/nginx-le:latest
     restart: always
+    environment:
+      - TZ=GMT
+      - LETSENCRYPT=true
+      - LE_EMAIL=${EMAIL}
+      - LE_FQDN=${FQDN}
     ports:
       - '80:80'
       - '443:443'
     volumes:
       - ~/maintain/ssl:/etc/nginx/ssl
       - ~/maintain/nginx.conf:/etc/nginx/service.conf
-    environment:
-      - TZ=GMT
-      - LETSENCRYPT=true
-      - LE_EMAIL=${EMAIL}
-      - LE_FQDN=${FQDN}
     depends_on:
       - app
-
-networks:
-  app-network:
-    driver: bridge
+# volumes:
+#   db:
+#     driver: local

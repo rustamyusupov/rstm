@@ -9,6 +9,10 @@ const toggleWishes = show => {
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.querySelector('#visibility');
 
+  if (!input) {
+    return;
+  }
+
   toggleWishes(input.checked);
   input.addEventListener('change', async () => {
     toggleWishes(input.checked);
