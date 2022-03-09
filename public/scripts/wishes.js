@@ -1,3 +1,5 @@
+import isTouch from './isTouchDevice.js';
+
 const toggleWishes = show => {
   const wishes = document.querySelectorAll('.wishes__item--archive');
 
@@ -7,7 +9,10 @@ const toggleWishes = show => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  const page = document.querySelector('#page');
   const input = document.querySelector('#visibility');
+
+  page.classList.add(isTouch() ? '' : 'not-touch');
 
   if (!input) {
     return;
