@@ -65,6 +65,12 @@
   color: var(--color-black);
 }
 
+@media (prefers-color-scheme: dark) {
+  .wishes__item--archive > .link {
+    color: var(--color-white);
+  }
+}
+
 .wishes__cog {
   background-color: unset;
   border: unset;
