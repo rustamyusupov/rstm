@@ -8,9 +8,22 @@ const toggleWishes = show => {
   });
 };
 
+const toggleVisibility = visibility => {
+  const url = new URL(window.location.href);
+
+  if (visibility) {
+    url.searchParams.set('visibility', 'true');
+  } else {
+    url.searchParams.delete('visibility');
+  }
+
+  window.history.replaceState(null, null, url.toString());
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('#page');
   const input = document.querySelector('#visibility');
+  const visibility = window.location.search.includes('visibility');
 
   page.classList.add(isTouch() ? '' : 'not-touch');
 
@@ -18,8 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  toggleWishes(input.checked);
+  input.checked = visibility;
+  toggleWishes(visibility);
+
   input.addEventListener('change', async () => {
     toggleWishes(input.checked);
+    toggleVisibility(input.checked);
   });
 });
