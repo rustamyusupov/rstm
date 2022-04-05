@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.querySelector('#visibility');
   const visibility = window.location.search.includes('visibility');
 
-  page.classList.add(isTouch() ? '' : 'not-touch');
+  if (!isTouch()) {
+    page.classList.add('not-touch');
+  }
 
   if (!input) {
     return;
