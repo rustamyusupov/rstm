@@ -83,14 +83,10 @@
   transform: translateY(-50%);
 }
 
-.not-touch .wishes__visibility:hover,
-.not-touch .wishes__add:hover,
 .not-touch .wishes__item:hover .wishes__cog {
   opacity: 1;
 }
 
-.not-touch .wishes__visibility,
-.not-touch .wishes__add,
 .not-touch .wishes__cog {
   opacity: 0;
 }
