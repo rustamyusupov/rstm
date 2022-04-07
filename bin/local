@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
+
+const app = require('../src');
+
+const basePath = path.join(__dirname, '..');
+const keyPath = path.join(basePath, 'localhost.key');
+const certPath = path.join(basePath, 'localhost.crt');
+const key = fs.readFileSync(keyPath, 'utf8');
+const cert = fs.readFileSync(certPath, 'utf8');
+
+const port = process.env.PORT || '443';
+const credentials = { key, cert };
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port);

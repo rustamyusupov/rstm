@@ -4,3 +4,5 @@
 node_modules
 docker-compose.db.yml
 init.sql
+localhost.crt
+localhost.key
