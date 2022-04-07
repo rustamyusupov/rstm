@@ -26,4 +26,9 @@ const signin = async (req, res) => {
   });
 };
 
-module.exports = { index, signin };
+const signout = async (req, res) => {
+  req.session.destroy();
+  res.redirect('wishes');
+};
+
+module.exports = { index, signin, signout };

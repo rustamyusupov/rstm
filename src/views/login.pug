@@ -6,7 +6,7 @@ block head
 block content
   main.login
     h1.login__title Sign in
-    form.login__form(action="/login" method="post")
+    form.login__form(action="/auth" method="post")
       input.form-control.login__field(
         class=(error ? 'login__field--invalid' : '' )
         type="text"

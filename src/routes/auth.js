@@ -6,5 +6,6 @@ const routes = express.Router();
 
 routes.get('/', auth.index);
 routes.post('/', auth.signin);
+routes.delete('/', auth.signout);
 
 module.exports = routes;

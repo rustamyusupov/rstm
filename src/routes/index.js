@@ -7,7 +7,7 @@ const wishes = require('./wishes');
 const routes = express.Router();
 
 routes.use('/', home);
-routes.use('/login', auth);
+routes.use('/auth', auth);
 routes.use('/wishes', wishes);
 routes.use('*', (req, res) => res.redirect('/'));
 
