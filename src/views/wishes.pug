@@ -13,7 +13,8 @@ block content
       if editable
         input#visibility.wishes__checkbox(type="checkbox")
         label.wishes__visibility(for="visibility")
-        +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Add wish")(class="wishes__add")
+        +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Add wish")(class="wishes__icon")
+        +iconLink('/auth/logout', 'logout.svg', width=24, height=24, "Add wish")(class="wishes__icon")
     each category in categories
       section.wishes
         h2.wishes__category-title= category.name

@@ -16,7 +16,7 @@ const signin = async (req, res) => {
   if (u?.password === hashedPassword) {
     req.session.user = u;
 
-    return res.redirect('wishes');
+    return res.redirect('/wishes');
   }
 
   return res.render('login', {
@@ -28,7 +28,7 @@ const signin = async (req, res) => {
 
 const signout = async (req, res) => {
   req.session.destroy();
-  res.redirect('wishes');
+  res.redirect('/wishes');
 };
 
 module.exports = { index, signin, signout };

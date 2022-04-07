@@ -20,6 +20,12 @@
   width: 24px;
 }
 
+.wishes__icon:not(:last-child) {
+  height: 24px;
+  margin-right: 5px;
+  width: 24px;
+}
+
 .wishes__visibility:before {
   background-image: url('/icons/visibility-off.svg');
   content: '';
