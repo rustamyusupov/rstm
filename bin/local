@@ -12,7 +12,7 @@ const certPath = path.join(basePath, 'localhost.crt');
 const key = fs.readFileSync(keyPath, 'utf8');
 const cert = fs.readFileSync(certPath, 'utf8');
 
-const port = process.env.PORT || '443';
+const port = process.env.PORT || '3000';
 const credentials = { key, cert };
 
 const httpsServer = https.createServer(credentials, app);
