@@ -2,6 +2,11 @@ const db = require('../utils/db');
 const category = require('../models/category');
 const currency = require('../models/currency');
 
+const coinsInPrice = 100;
+const decimalDigits = 2;
+
+const convertPrice = price => Math.trunc(Math.round(price * coinsInPrice));
+
 const filterByCategory =
   id =>
   ({ category_id }) =>
@@ -17,10 +22,10 @@ const getCurrency =
   });
 
 const getPrice = ({ price, currency, ...rest }) => ({
-  price: Math.ceil(price).toLocaleString('ru', {
+  price: (price / coinsInPrice).toLocaleString('ru', {
     style: 'currency',
     currency: currency,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: decimalDigits,
   }),
   ...rest,
 });
@@ -57,6 +62,11 @@ const getItem = async id => {
 
   const query = `SELECT * FROM wishes WHERE id = '${id}'`;
   const result = await db.query(query);
+  const price = result.rows?.[0]?.price;
+
+  if (price) {
+    result.rows[0].price = price / coinsInPrice;
+  }
 
   return result.rows?.[0];
 };
@@ -64,7 +74,10 @@ const getItem = async id => {
 const updateItem = async (id, body) => {
   const data = getArchive(body);
   const values = Object.entries(data)
-    .map(([name, value]) => `${name}='${value}'`)
+    .map(
+      ([name, value]) =>
+        `${name}='${name === 'price' ? convertPrice(value) : value}'`
+    )
     .join(',');
   const query = `UPDATE wishes SET ${values} WHERE id = ${id} RETURNING id`;
   const result = await db.query(query);
@@ -75,8 +88,11 @@ const updateItem = async (id, body) => {
 const addItem = async body => {
   const data = getArchive(body);
   const columns = Object.keys(data).join(',');
-  const values = Object.values(data)
-    .map(value => `'${value}'`)
+  const values = Object.entries(data)
+    // .map(value => `'${value}'`)
+    .map(
+      ([name, value]) => `'${name === 'price' ? convertPrice(value) : value}'`
+    )
     .join(',');
   const query = `INSERT INTO wishes (${columns}) VALUES (${values}) RETURNING id`;
   const result = await db.query(query);
