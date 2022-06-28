@@ -30,6 +30,8 @@ const getPrice = ({ price, currency, ...rest }) => ({
   ...rest,
 });
 
+const removeEmpty = ({ wishes }) => wishes.length > 0;
+
 const getArchive = wish => ({
   ...wish,
   archive: wish.archive === 'on',
@@ -43,14 +45,16 @@ const getList = async archive => {
   }`;
   const wishes = await db.query(query);
 
-  const result = categories.map(({ id, ...rest }) => ({
-    wishes: wishes.rows
-      ?.filter(filterByCategory(id))
-      .sort(sort)
-      .map(getCurrency(currencies))
-      .map(getPrice),
-    ...rest,
-  }));
+  const result = categories
+    .map(({ id, ...rest }) => ({
+      wishes: wishes.rows
+        ?.filter(filterByCategory(id))
+        .sort(sort)
+        .map(getCurrency(currencies))
+        .map(getPrice),
+      ...rest,
+    }))
+    .filter(removeEmpty);
 
   return Array.isArray(result) ? result : [];
 };
@@ -89,7 +93,6 @@ const addItem = async body => {
   const data = getArchive(body);
   const columns = Object.keys(data).join(',');
   const values = Object.entries(data)
-    // .map(value => `'${value}'`)
     .map(
       ([name, value]) => `'${name === 'price' ? convertPrice(value) : value}'`
     )
