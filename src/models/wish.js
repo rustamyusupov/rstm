@@ -1,38 +1,16 @@
-const db = require('../utils/db');
-const category = require('../models/category');
+const { coinsInPrice } = require('../utils/constants');
 
-const coinsInPrice = 100;
-const decimalDigits = 2;
+const db = require('../utils/db');
 
 const convertPrice = price =>
   Math.trunc(Math.round(Number(price) * coinsInPrice));
-
-const filterByCategory =
-  id =>
-  ({ category_id }) =>
-    category_id === id;
-
-const sort = (a, b) => b.sort - a.sort;
-
-const getPrice = ({ price, currency, ...rest }) => ({
-  price: (price / coinsInPrice).toLocaleString('ru', {
-    style: 'currency',
-    currency: currency,
-    maximumFractionDigits: decimalDigits,
-  }),
-  ...rest,
-});
-
-const removeEmpty = ({ wishes }) => wishes.length > 0;
 
 const getArchive = wish => ({
   ...wish,
   archive: wish.archive === 'on',
 });
 
-const getList = async archive => {
-  // TODO: rewrite in one query
-  const categories = await category.getList();
+const getList = async isAuth => {
   const query = `
     SELECT W.*, Cat.name AS category, Cur.name AS currency, P.price
     FROM wishes W
@@ -46,22 +24,11 @@ const getList = async archive => {
         ORDER BY created_at DESC
         LIMIT 1
       )
-    ${archive ? '' : 'WHERE archive = false'}
+    ${isAuth ? '' : 'WHERE archive = false'}
   `;
-  const wishes = await db.query(query);
+  const result = await db.query(query);
 
-  // TODO: move as much as possible into the query
-  const result = categories
-    .map(({ id, ...rest }) => ({
-      wishes: wishes.rows
-        ?.filter(filterByCategory(id))
-        .sort(sort)
-        .map(getPrice),
-      ...rest,
-    }))
-    .filter(removeEmpty);
-
-  return Array.isArray(result) ? result : [];
+  return result.rows;
 };
 
 const getItem = async id => {
