@@ -8,9 +8,9 @@ const convertPrice = price =>
   Math.trunc(Math.round(Number(price) * coinsInPrice));
 
 const filterByCategory =
-  name =>
-  ({ category }) =>
-    category === name;
+  id =>
+  ({ category_id }) =>
+    category_id === id;
 
 const sort = (a, b) => b.sort - a.sort;
 
@@ -50,11 +50,12 @@ const getList = async archive => {
   `;
   const wishes = await db.query(query);
 
+  console.log(categories);
   // TODO: move as much as possible into the query
   const result = categories
-    .map(({ name, ...rest }) => ({
+    .map(({ id, ...rest }) => ({
       wishes: wishes.rows
-        ?.filter(filterByCategory(name))
+        ?.filter(filterByCategory(id))
         .sort(sort)
         .map(getPrice),
       ...rest,
