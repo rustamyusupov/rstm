@@ -50,7 +50,6 @@ const getList = async archive => {
   `;
   const wishes = await db.query(query);
 
-  console.log(categories);
   // TODO: move as much as possible into the query
   const result = categories
     .map(({ id, ...rest }) => ({
@@ -143,7 +142,6 @@ const updateItem = async (id, body) => {
     INSERT INTO prices (price, wish_id)
     VALUES (${price}, ${result.rows?.[0].id})
   `;
-  console.log(priceQuery);
   await db.query(priceQuery);
 
   return result.rows?.[0];
