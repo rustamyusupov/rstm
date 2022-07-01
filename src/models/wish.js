@@ -1,25 +1,18 @@
 const db = require('../utils/db');
 const category = require('../models/category');
-const currency = require('../models/currency');
 
 const coinsInPrice = 100;
 const decimalDigits = 2;
 
-const convertPrice = price => Math.trunc(Math.round(price * coinsInPrice));
+const convertPrice = price =>
+  Math.trunc(Math.round(Number(price) * coinsInPrice));
 
 const filterByCategory =
-  id =>
-  ({ category_id }) =>
-    category_id === id;
+  name =>
+  ({ category }) =>
+    category === name;
 
 const sort = (a, b) => b.sort - a.sort;
-
-const getCurrency =
-  currencies =>
-  ({ currency_id, ...rest }) => ({
-    currency: currencies.find(({ id }) => currency_id === id)?.name,
-    ...rest,
-  });
 
 const getPrice = ({ price, currency, ...rest }) => ({
   price: (price / coinsInPrice).toLocaleString('ru', {
@@ -38,19 +31,31 @@ const getArchive = wish => ({
 });
 
 const getList = async archive => {
+  // TODO: rewrite in one query
   const categories = await category.getList();
-  const currencies = await currency.getList();
-  const query = `SELECT * FROM wishes ${
-    archive ? '' : 'WHERE archive = false'
-  }`;
+  const query = `
+    SELECT W.*, Cat.name AS category, Cur.name AS currency, P.price
+    FROM wishes W
+    JOIN categories Cat ON W.category_id = Cat.id
+    JOIN currencies Cur ON W.currency_id = Cur.id
+    JOIN prices P ON W.id = P.wish_id
+      AND P.created_at = (
+        SELECT created_at
+        FROM prices
+        WHERE wish_id = W.id
+        ORDER BY created_at DESC
+        LIMIT 1
+      )
+    ${archive ? '' : 'WHERE archive = false'}
+  `;
   const wishes = await db.query(query);
 
+  // TODO: move as much as possible into the query
   const result = categories
-    .map(({ id, ...rest }) => ({
+    .map(({ name, ...rest }) => ({
       wishes: wishes.rows
-        ?.filter(filterByCategory(id))
+        ?.filter(filterByCategory(name))
         .sort(sort)
-        .map(getCurrency(currencies))
         .map(getPrice),
       ...rest,
     }))
@@ -64,7 +69,19 @@ const getItem = async id => {
     return {};
   }
 
-  const query = `SELECT * FROM wishes WHERE id = '${id}'`;
+  const query = `
+    SELECT *, P.price
+    FROM wishes W
+    JOIN prices P ON W.id = P.wish_id
+    AND P.created_at = (
+      SELECT created_at
+      FROM prices
+      WHERE wish_id = W.id
+      ORDER BY created_at DESC
+      LIMIT 1
+    )
+    WHERE W.id = '${id}'
+  `;
   const result = await db.query(query);
   const price = result.rows?.[0]?.price;
 
@@ -75,39 +92,79 @@ const getItem = async id => {
   return result.rows?.[0];
 };
 
-const updateItem = async (id, body) => {
+const addItem = async body => {
+  // TODO: think about convert in a query
   const data = getArchive(body);
-  const values = Object.entries(data)
-    .map(
-      ([name, value]) =>
-        `${name}='${name === 'price' ? convertPrice(value) : value}'`
-    )
+
+  delete data.price;
+
+  const columns = Object.keys(data).join(',');
+  const values = Object.values(data)
+    .map(value => `'${value}'`)
     .join(',');
-  const query = `UPDATE wishes SET ${values} WHERE id = ${id} RETURNING id`;
-  const result = await db.query(query);
+  const wishesQuery = `
+    INSERT INTO wishes (${columns})
+    VALUES (${values})
+    RETURNING id
+  `;
+  const result = await db.query(wishesQuery);
+
+  // TODO: rewrite in one query
+  const priceQuery = `
+    INSERT INTO prices (price, wish_id)
+    VALUES (${convertPrice(body.price)}, ${result.rows?.[0].id})
+    RETURNING id
+  `;
+  await db.query(priceQuery);
 
   return result.rows?.[0];
 };
 
-const addItem = async body => {
+const updateItem = async (id, body) => {
+  // TODO: think about convert in a query
   const data = getArchive(body);
-  const columns = Object.keys(data).join(',');
+
+  delete data.price;
+
   const values = Object.entries(data)
-    .map(
-      ([name, value]) => `'${name === 'price' ? convertPrice(value) : value}'`
-    )
+    .map(([key, value]) => `${key}='${value}'`)
     .join(',');
-  const query = `INSERT INTO wishes (${columns}) VALUES (${values}) RETURNING id`;
+  const query = `
+    UPDATE wishes
+    SET ${values}
+    WHERE id = ${id}
+    RETURNING id
+  `;
   const result = await db.query(query);
+
+  // TODO: rewrite in one query
+  const priceQuery = `
+  INSERT INTO prices (price, wish_id)
+  VALUES (${convertPrice(body.price)}, ${result.rows?.[0].id})
+  RETURNING id
+  `;
+  await db.query(priceQuery);
 
   return result.rows?.[0];
 };
 
 const deleteItem = async id => {
-  const query = `DELETE FROM wishes WHERE id = ${id}`;
-  const result = await db.query(query);
+  const pricesQuery = `
+    DELETE 
+    FROM prices
+    WHERE wish_id = ${id}
+  `;
+  await db.query(pricesQuery);
+
+  // TODO: rewrite in one query
+  const wishesQuery = `
+    DELETE 
+    FROM wishes
+    WHERE id = ${id}
+  `;
+  const result = await db.query(wishesQuery);
 
   return result;
 };
 
-module.exports = { getList, getItem, updateItem, addItem, deleteItem };
+module.exports = { getList, getItem, addItem, updateItem, deleteItem };

@@ -18,10 +18,9 @@ CREATE TABLE currencies (
 );
 
 CREATE TABLE wishes (
-	id SERIAL PRIMARY KEY,
-	name TEXT NOT NULL,
-	link TEXT NOT NULL,
-  price INTEGER NOT NULL,
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  link TEXT NOT NULL,
   sort INTEGER DEFAULT 0,
   archive BOOLEAN DEFAULT false,
   created_at TIMESTAMP DEFAULT NOW(),
@@ -32,6 +31,15 @@ CREATE TABLE wishes (
 
   currency_id INTEGER NOT NULL
   REFERENCES currencies(id)
+);
+
+CREATE TABLE prices (
+  id SERIAL PRIMARY KEY,
+  price INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT now(),
+
+  wish_id INTEGER NOT NULL
+  REFERENCES wishes(id)
 );
 
 CREATE TABLE session (
