@@ -114,7 +114,6 @@ const addItem = async body => {
   const priceQuery = `
     INSERT INTO prices (price, wish_id)
     VALUES (${convertPrice(body.price)}, ${result.rows?.[0].id})
-    RETURNING id
   `;
   await db.query(priceQuery);
 
@@ -139,11 +138,12 @@ const updateItem = async (id, body) => {
   const result = await db.query(query);
 
   // TODO: rewrite in one query
+  const price = convertPrice(body.price);
   const priceQuery = `
-  INSERT INTO prices (price, wish_id)
-  VALUES (${convertPrice(body.price)}, ${result.rows?.[0].id})
-  RETURNING id
+    INSERT INTO prices (price, wish_id)
+    VALUES (${price}, ${result.rows?.[0].id})
   `;
+  console.log(priceQuery);
   await db.query(priceQuery);
 
   return result.rows?.[0];
