@@ -1,18 +1,9 @@
-const { coinsInPrice } = require('../utils/constants');
-
 const db = require('../utils/db');
-
-const convertPrice = price =>
-  Math.trunc(Math.round(Number(price) * coinsInPrice));
-
-const getArchive = wish => ({
-  ...wish,
-  archive: wish.archive === 'on',
-});
+const { coinsInPrice } = require('../utils/constants');
 
 const getList = async isAuth => {
   const query = `
-    SELECT W.*, Cat.name AS category, Cur.name AS currency, P.price
+    SELECT W.*, Cat.name AS category, Cur.name AS currency, P.price / ${coinsInPrice}.00 AS price
     FROM wishes W
     JOIN categories Cat ON W.category_id = Cat.id
     JOIN currencies Cur ON W.currency_id = Cur.id
@@ -25,6 +16,7 @@ const getList = async isAuth => {
         LIMIT 1
       )
     ${isAuth ? '' : 'WHERE archive = false'}
+    ORDER BY sort DESC
   `;
   const result = await db.query(query);
 
@@ -32,12 +24,8 @@ const getList = async isAuth => {
 };
 
 const getItem = async id => {
-  if (id === 'add') {
-    return {};
-  }
-
   const query = `
-    SELECT *, P.price
+    SELECT *, ROUND(P.price / ${coinsInPrice}.0, 2) AS price
     FROM wishes W
     JOIN prices P ON W.id = P.wish_id
     AND P.created_at = (
@@ -50,48 +38,26 @@ const getItem = async id => {
     WHERE W.id = '${id}'
   `;
   const result = await db.query(query);
-  const price = result.rows?.[0]?.price;
-
-  if (price) {
-    result.rows[0].price = price / coinsInPrice;
-  }
 
   return result.rows?.[0];
 };
 
-const addItem = async body => {
-  // TODO: think about convert in a query
-  const data = getArchive(body);
-
-  delete data.price;
-
+const addItem = async data => {
   const columns = Object.keys(data).join(',');
   const values = Object.values(data)
     .map(value => `'${value}'`)
     .join(',');
-  const wishesQuery = `
+  const query = `
     INSERT INTO wishes (${columns})
     VALUES (${values})
     RETURNING id
   `;
-  const result = await db.query(wishesQuery);
-
-  // TODO: rewrite in one query
-  const priceQuery = `
-    INSERT INTO prices (price, wish_id)
-    VALUES (${convertPrice(body.price)}, ${result.rows?.[0].id})
-  `;
-  await db.query(priceQuery);
+  const result = await db.query(query);
 
   return result.rows?.[0];
 };
 
-const updateItem = async (id, body) => {
-  // TODO: think about convert in a query
-  const data = getArchive(body);
-
-  delete data.price;
-
+const updateItem = async (id, data) => {
   const values = Object.entries(data)
     .map(([key, value]) => `${key}='${value}'`)
     .join(',');
@@ -103,32 +69,16 @@ const updateItem = async (id, body) => {
   `;
   const result = await db.query(query);
 
-  // TODO: rewrite in one query
-  const price = convertPrice(body.price);
-  const priceQuery = `
-    INSERT INTO prices (price, wish_id)
-    VALUES (${price}, ${result.rows?.[0].id})
-  `;
-  await db.query(priceQuery);
-
   return result.rows?.[0];
 };
 
 const deleteItem = async id => {
-  const pricesQuery = `
-    DELETE 
-    FROM prices
-    WHERE wish_id = ${id}
-  `;
-  await db.query(pricesQuery);
-
-  // TODO: rewrite in one query
-  const wishesQuery = `
+  const query = `
     DELETE 
     FROM wishes
     WHERE id = ${id}
   `;
-  const result = await db.query(wishesQuery);
+  const result = await db.query(query);
 
   return result;
 };
