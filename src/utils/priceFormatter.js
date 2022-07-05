@@ -7,4 +7,4 @@ const formatter = currency =>
     maximumFractionDigits: decimalDigits,
   });
 
-module.exports = { formatter };
+module.exports = formatter;

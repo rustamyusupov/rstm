@@ -1,16 +1,12 @@
-const { formatter } = require('../utils/priceFormatter');
-
 const category = require('../models/category');
 const currency = require('../models/currency');
 const price = require('../models/price');
 const wish = require('../models/wish');
 
-const index = async (req, res) => {
-  const isAuth = Boolean(req.session?.user?.id);
-  const categories = await category.getList();
-  const wishes = await wish.getList(isAuth);
+const formatter = require('../utils/priceFormatter');
 
-  const result = categories
+const categoriseWishes = (categories, wishes) =>
+  categories
     .map(({ id, ...rest }) => ({
       wishes: wishes
         ?.filter(({ category_id }) => category_id === id)
@@ -22,10 +18,15 @@ const index = async (req, res) => {
     }))
     .filter(({ wishes }) => wishes?.length > 0);
 
+const index = async (req, res) => {
+  const isAuth = Boolean(req.session?.user?.id);
+  const categories = await category.getList();
+  const wishes = await wish.getList(isAuth);
+
   res.render('wishes', {
     title: 'Rustam | Wishes',
     description: 'A little bit of my wishes',
-    categories: result,
+    categories: categoriseWishes(categories, wishes),
     editable: isAuth,
   });
 };
