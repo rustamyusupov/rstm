@@ -1,8 +1,8 @@
 const db = require('../utils/db');
-const { coinsInPrice } = require('../utils/constants');
+const getPriceInCoins = require('../utils/getPriceInCoins');
 
 const addItem = async (id, price) => {
-  const value = Math.trunc(Math.round(Number(price) * coinsInPrice));
+  const value = getPriceInCoins(price);
 
   const query = `
     INSERT INTO prices (price, wish_id)
