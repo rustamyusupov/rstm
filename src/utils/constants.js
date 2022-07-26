@@ -1,4 +1,11 @@
 const decimalDigits = 2;
 const coinsInPrice = 100;
 
-module.exports = { decimalDigits, coinsInPrice };
+const currencies = {
+  RUB: 'руб',
+  USD: '$',
+  EUR: '€',
+  GBP: '£',
+};
+
+module.exports = { decimalDigits, coinsInPrice, currencies };

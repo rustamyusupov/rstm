@@ -4,6 +4,7 @@ const price = require('../models/price');
 const wish = require('../models/wish');
 
 const formatter = require('../utils/priceFormatter');
+const fetchPrice = require('../utils/fetchPrice');
 
 const categoriseWishes = (categories, wishes) =>
   categories
@@ -29,6 +30,11 @@ const index = async (req, res) => {
     categories: categoriseWishes(categories, wishes),
     editable: isAuth,
   });
+
+  const prices = await Promise.all(wishes.map(fetchPrice));
+  const newPrices = prices.filter(({ price }) => price);
+
+  await price.addItems(newPrices);
 };
 
 const item = async (req, res) => {
