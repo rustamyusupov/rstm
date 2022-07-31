@@ -13,6 +13,20 @@ const addItem = async (id, price) => {
   return result.rows?.[0];
 };
 
+const addItems = async prices => {
+  const values = prices
+    .map(({ id, price }) => `(${id}, ${getPriceInCoins(price)})`)
+    .join(', ');
+  const query = `
+    INSERT INTO prices (wish_id, price)
+    VALUES ${values}
+    RETURNING *;
+    `;
+  const result = await db.query(query);
+
+  return result.rows;
+};
+
 const deleteItem = async id => {
   const query = `
     DELETE
@@ -24,4 +38,4 @@ const deleteItem = async id => {
   return result;
 };
 
-module.exports = { addItem, deleteItem };
+module.exports = { addItem, deleteItem, addItems };
