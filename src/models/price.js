@@ -1,5 +1,8 @@
 const db = require('../utils/db');
-const getPriceInCoins = require('../utils/getPriceInCoins');
+const { coinsInPrice } = require('../utils/constants');
+
+const getPriceInCoins = value =>
+  Math.trunc(Math.round(Number(value) * coinsInPrice));
 
 const addItem = async (id, price) => {
   const value = getPriceInCoins(price);
