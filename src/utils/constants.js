@@ -1,3 +1,4 @@
+const everyDay = '0 0 * * *';
 const decimalDigits = 2;
 const coinsInPrice = 100;
 
@@ -8,4 +9,4 @@ const currencies = {
   GBP: '£',
 };
 
-module.exports = { decimalDigits, coinsInPrice, currencies };
+module.exports = { everyDay, decimalDigits, coinsInPrice, currencies };
