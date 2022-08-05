@@ -25,11 +25,7 @@ const categoriseWishes = (categories, wishes) =>
     }))
     .filter(({ wishes }) => wishes?.length > 0);
 
-const updatePrices = require('../utils/updatePrices');
-
 const index = async (req, res) => {
-  await updatePrices();
-
   const isAuth = Boolean(req.session?.user?.id);
   const categories = await category.getList();
   const wishes = await wish.getList(isAuth);
