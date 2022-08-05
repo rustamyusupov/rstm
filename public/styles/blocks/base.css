@@ -22,7 +22,6 @@ input,
 button,
 select {
   font: inherit;
-  outline: none;
 }
 
 button {

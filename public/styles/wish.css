@@ -53,11 +53,12 @@
   align-self: flex-start;
   display: flex;
   justify-content: space-between;
-  margin-left: 15px;
+  margin-left: 11px;
   width: 75px;
 }
 
 .wish__archive-field {
+  height: 16px;
   padding: 0;
   width: 16px;
 }
