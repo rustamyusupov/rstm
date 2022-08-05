@@ -9,6 +9,9 @@ const selectors = {
   'www.tradeinn.com': '#total_dinamic',
   'electronics.sony.com': 'div.custom-product-summary__price',
   'veter.cc': 'div.product-details__product-price.ec-price-item > span',
+  'www.fizik.com': 'div.product-info-price #product-price-6098 > span.price',
+  'www.lecoffeeride.cc':
+    '#product-12255 > div.summary.entry-summary > p > span',
 };
 
 const fetch = async wish => {
@@ -19,11 +22,11 @@ const fetch = async wish => {
     return null;
   }
 
-  const response = await request(wish.link);
+  const response = await request(encodeURI(wish.link));
   const $ = cheerio.load(response);
   const text = $(selector).text();
   const newCurrency = text.replace(/[\d.,]/g, '').trim();
-  const newPrice = Number(text.replace(/[^\d.,]/g, ''));
+  const newPrice = Number(text.replace(/[^\d.,]/g, '').replace(',', '.'));
   const isNew =
     currencies[wish.currency] === newCurrency &&
     Number(wish.price) !== newPrice;
