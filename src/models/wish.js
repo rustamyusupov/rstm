@@ -16,7 +16,7 @@ const getList = async isAuth => {
         LIMIT 1
       )
     ${isAuth ? '' : 'WHERE archive = false'}
-    ORDER BY sort DESC
+    ORDER BY W.sort DESC, W.name ASC
   `;
   const result = await db.query(query);
 
