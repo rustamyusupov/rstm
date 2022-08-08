@@ -53,6 +53,15 @@ const item = async (req, res) => {
   });
 };
 
+const chart = async (req, res) => {
+  // const { id } = req.params;
+
+  res.render('chart', {
+    title: 'Rustam | Wish',
+    description: 'A little bit of my wish',
+  });
+};
+
 const add = async (req, res) => {
   const data = req.body;
   const priceValue = req.body.price;
@@ -88,4 +97,4 @@ const remove = async (req, res) => {
   return res.status(200).json({});
 };
 
-module.exports = { index, add, item, update, remove };
+module.exports = { index, item, chart, add, update, remove };
