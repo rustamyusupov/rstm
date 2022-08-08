@@ -78,16 +78,18 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   const data = req.body;
-  const priceValue = req.body.price;
+  const newPrice = Number(req.body.price);
 
   delete req.body.price;
   data.archive = data.archive === 'on';
   const item = await wish.updateItem(req.params.id, data);
+  const currentPrice = await price.getCurrent(req.params.id);
 
-  if (item?.id) {
-    await price.addItem(item.id, priceValue);
-    res.redirect('/wishes');
+  if (item?.id && currentPrice.price !== newPrice) {
+    await price.addItem(item.id, newPrice);
   }
+
+  res.redirect('/wishes');
 };
 
 const remove = async (req, res) => {

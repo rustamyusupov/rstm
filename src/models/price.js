@@ -4,6 +4,17 @@ const { coinsInPrice } = require('../utils/constants');
 const getPriceInCoins = value =>
   Math.trunc(Math.round(Number(value) * coinsInPrice));
 
+const getCurrent = async id => {
+  const query = `SELECT * FROM prices WHERE wish_id = '${id}' ORDER BY created_at DESC LIMIT 1`;
+  const results = await db.query(query);
+
+  if (results.rows?.[0]?.price) {
+    results.rows[0].price = results.rows?.[0]?.price / coinsInPrice;
+  }
+
+  return results.rows?.[0];
+};
+
 const addItem = async (id, price) => {
   const value = getPriceInCoins(price);
 
@@ -41,4 +52,4 @@ const deleteItem = async id => {
   return result;
 };
 
-module.exports = { addItem, deleteItem, addItems };
+module.exports = { getCurrent, addItem, deleteItem, addItems };
