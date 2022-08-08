@@ -28,7 +28,7 @@ block content
           each wish in category.wishes 
             li.wishes__item(class={'wishes__item--archive': wish.archive})
               if editable
-                +iconLink(`/wishes/${wish.id}`, 'settings.svg', "Settings")(class="wishes__cog")
+                +iconLink(`/wishes/${wish.id}/edit`, 'settings.svg', "Settings")(class="wishes__cog")
               +link(wish.link, wish.name)
               | &nbsp;&mdash; 
               +link(`/wishes/${wish.id}/chart`, wish.price, false)(
