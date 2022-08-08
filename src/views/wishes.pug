@@ -14,21 +14,23 @@ block content
         input#visibility.wishes__checkbox(type="checkbox")
         label.wishes__visibility(for="visibility")
         +iconLink('/wishes/add', 'add.svg', width=24, height=24, "Add wish")(class="wishes__icon")
-        +iconLink('/auth/logout', 'logout.svg', width=24, height=24, "Add wish")(class="wishes__icon")
+        +iconLink(
+          '/auth/logout',
+          'logout.svg',
+          width=24,
+          height=24,
+          "Add wish"
+        )(class="wishes__icon")
     each category in categories
       section.wishes
         h2.wishes__category-title= category.name
         ul.wishes__list
           each wish in category.wishes 
-            li.wishes__item(class=(wish.archive ? 'wishes__item--archive' : ''))
+            li.wishes__item(class={'wishes__item--archive': wish.archive})
               if editable
-                +iconLink(
-                  `/wishes/${wish.id}`,
-                  'settings.svg',
-                  width="16",
-                  height="16",
-                  "Settings"
-                )(class="wishes__cog")
+                +iconLink(`/wishes/${wish.id}`, 'settings.svg', "Settings")(class="wishes__cog")
               +link(wish.link, wish.name)
-              |  – 
-              span= wish.price
+              | &nbsp;&mdash; 
+              +link(`/wishes/${wish.id}/chart`, wish.price, false)(
+                class={'wishes__price': true, 'wishes__price--falls': wish.diff < 0}
+              )

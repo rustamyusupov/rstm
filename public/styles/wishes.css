@@ -96,3 +96,11 @@
 .not-touch .wishes__cog {
   opacity: 0;
 }
+
+.wishes__price {
+  color: black;
+}
+
+.wishes__price--falls {
+  color: red;
+}
