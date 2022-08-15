@@ -7,32 +7,34 @@ const getList = async isAuth => {
       W.*, 
       Cat.name AS category, 
       Cur.name AS currency, 
-      P1.price / ${coinsInPrice}.00 AS price, 
-      ROUND((P1.price::DECIMAL - P2.price::DECIMAL) / P2.price::DECIMAL * 100, 1) AS diff
+      P.price / ${coinsInPrice}.00 AS price
     FROM wishes W
     JOIN categories Cat ON W.category_id = Cat.id
     JOIN currencies Cur ON W.currency_id = Cur.id
-    JOIN prices P1 ON W.id = P1.wish_id
-      AND P1.created_at = (
+    JOIN prices P ON W.id = P.wish_id
+      AND P.created_at = (
         SELECT created_at
         FROM prices
         WHERE wish_id = W.id
         ORDER BY created_at DESC
         LIMIT 1
-      )
-    JOIN prices P2 ON W.id = P2.wish_id
-      AND P2.created_at = (
-        SELECT created_at
-        FROM prices
-        WHERE wish_id = W.id
-        ORDER BY created_at DESC
-        LIMIT 1
-        OFFSET 1
       )
     ${isAuth ? '' : 'WHERE archive = false'}
     ORDER BY W.sort DESC, W.name ASC
   `;
+  // TODO: return wish when only one price
   const result = await db.query(query);
+
+  // ROUND((P1.price::DECIMAL - P2.price::DECIMAL) / P2.price::DECIMAL * 100, 1) AS diff
+  // JOIN prices P2 ON W.id = P2.wish_id
+  // AND P2.created_at = (
+  //   SELECT created_at
+  //   FROM prices
+  //   WHERE wish_id = W.id
+  //   ORDER BY created_at DESC
+  //   LIMIT 1
+  //   OFFSET 1
+  // )
 
   return result.rows;
 };

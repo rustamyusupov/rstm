@@ -40,7 +40,7 @@ const index = async (req, res) => {
 
 const item = async (req, res) => {
   const { id } = req.params;
-  const item = id === 'add' ? {} : await wish.getItem(id);
+  const item = req.route.path === '/add' ? {} : await wish.getItem(id);
   const categories = await category.getList();
   const currencies = await currency.getList();
 
@@ -54,10 +54,12 @@ const item = async (req, res) => {
 };
 
 const chart = async (req, res) => {
-  // const { id } = req.params;
+  const { id } = req.params;
+  const prices = await price.getList(id);
+  console.log(prices);
 
   res.render('chart', {
-    title: 'Rustam | Wish',
+    title: 'Rustam | Chart',
     description: 'A little bit of my wish',
   });
 };

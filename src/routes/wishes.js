@@ -11,6 +11,6 @@ routes.get('/add', auth, wishes.item);
 routes.get('/:id/chart', auth, wishes.chart);
 routes.post('/add', auth, wishes.add);
 routes.post('/:id/edit', auth, wishes.update);
-routes.delete('/:id', auth, wishes.remove);
+routes.delete('/:id/edit', auth, wishes.remove);
 
 module.exports = routes;

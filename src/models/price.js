@@ -15,6 +15,13 @@ const getCurrent = async id => {
   return results.rows?.[0];
 };
 
+const getList = async id => {
+  const query = `SELECT DISTINCT * FROM prices WHERE wish_id = '${id}' ORDER BY created_at ASC`;
+  const results = await db.query(query);
+
+  return results.rows;
+};
+
 const addItem = async (id, price) => {
   const value = getPriceInCoins(price);
 
@@ -52,4 +59,4 @@ const deleteItem = async id => {
   return result;
 };
 
-module.exports = { getCurrent, addItem, deleteItem, addItems };
+module.exports = { getCurrent, getList, addItem, deleteItem, addItems };
