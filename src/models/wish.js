@@ -22,19 +22,7 @@ const getList = async isAuth => {
     ${isAuth ? '' : 'WHERE archive = false'}
     ORDER BY W.sort DESC, W.name ASC
   `;
-  // TODO: return wish when only one price
   const result = await db.query(query);
-
-  // ROUND((P1.price::DECIMAL - P2.price::DECIMAL) / P2.price::DECIMAL * 100, 1) AS diff
-  // JOIN prices P2 ON W.id = P2.wish_id
-  // AND P2.created_at = (
-  //   SELECT created_at
-  //   FROM prices
-  //   WHERE wish_id = W.id
-  //   ORDER BY created_at DESC
-  //   LIMIT 1
-  //   OFFSET 1
-  // )
 
   return result.rows;
 };

@@ -55,7 +55,7 @@ const item = async (req, res) => {
 
 const chart = async (req, res) => {
   const { id } = req.params;
-  const prices = await price.getList(id);
+  const prices = await price.getItem(id);
   console.log(prices);
 
   res.render('chart', {
