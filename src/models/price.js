@@ -5,7 +5,7 @@ const getPriceInCoins = value =>
   Math.trunc(Math.round(Number(value) * coinsInPrice));
 
 const getList = async () => {
-  const query = 'SELECT * FROM prices';
+  const query = 'SELECT * FROM prices ORDER BY created_at DESC';
   const results = await db.query(query);
 
   return results.rows;

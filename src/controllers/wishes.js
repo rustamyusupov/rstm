@@ -12,13 +12,23 @@ const formatter = currency =>
     maximumFractionDigits: decimalDigits,
   });
 
-const categoriseWishes = (categories, wishes) =>
+const getDiff = (id, prices) => {
+  const [last, penultimate] = prices
+    .filter(({ wish_id }) => wish_id === id)
+    .slice(0, 2)
+    .map(({ price }) => price);
+
+  return Math.round(((last - penultimate) / penultimate) * 100, -1);
+};
+
+const categoriseWishes = (categories, wishes, prices) =>
   categories
     .map(({ id, ...rest }) => ({
       wishes: wishes
         ?.filter(({ category_id }) => category_id === id)
         .map(({ price, currency, ...rest }) => ({
           price: formatter(currency).format(price),
+          diff: getDiff(rest.id, prices),
           ...rest,
         })),
       ...rest,
@@ -29,11 +39,12 @@ const index = async (req, res) => {
   const isAuth = Boolean(req.session?.user?.id);
   const categories = await category.getList();
   const wishes = await wish.getList(isAuth);
+  const prices = await price.getList();
 
   res.render('wishes', {
     title: 'Rustam | Wishes',
     description: 'A little bit of my wishes',
-    categories: categoriseWishes(categories, wishes),
+    categories: categoriseWishes(categories, wishes, prices),
     editable: isAuth,
   });
 };
