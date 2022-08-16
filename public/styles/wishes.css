@@ -98,9 +98,15 @@
 }
 
 .wishes__price {
-  color: black;
+  color: var(--color-black);
+}
+
+@media (prefers-color-scheme: dark) {
+  .wishes__price {
+    color: var(--color-white);
+  }
 }
 
 .wishes__price--falls {
-  color: green;
+  color: var(--color-green);
 }
