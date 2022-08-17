@@ -5,7 +5,7 @@
   "private": true,
   "author": "Rustam Yuspov",
   "scripts": {
-    "dev": "nodemon -r dotenv/config ./bin/local",
+    "dev": "nodemon --experimental-fetch -r dotenv/config ./bin/local",
     "start": "node ./bin/www",
     "lint": "eslint src/**/*.js"
   },
