@@ -22,8 +22,9 @@ const fetch = async wish => {
     return null;
   }
 
-  const response = await request(encodeURI(wish.link));
-  const $ = cheerio.load(response);
+  const response = await request(wish.link);
+  const data = await response.text();
+  const $ = cheerio.load(data);
   const text = $(selector).text();
   const newCurrency = text.replace(/[\d.,]/g, '').trim();
   const newPrice = Number(text.replace(/[^\d.,]/g, '').replace(',', '.'));
