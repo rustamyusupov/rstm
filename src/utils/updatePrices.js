@@ -47,6 +47,8 @@ const updatePrices = async () => {
   const wishes = await Promise.all(list.map(fetch));
   const updated = wishes.filter(Boolean);
 
+  console.log(list, wishes, updated);
+
   if (updated.length !== 0) {
     await price.addItems(updated);
   }
