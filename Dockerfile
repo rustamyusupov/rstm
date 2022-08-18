@@ -8,7 +8,7 @@ RUN npm install
 RUN npm prune --production
 
 
-FROM node:17-alpine
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
