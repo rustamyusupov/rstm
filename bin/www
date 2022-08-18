@@ -12,4 +12,4 @@ const server = http.createServer(app);
 
 app.set('port', port);
 server.listen(port);
-schedule.scheduleJob(everyDay, () => updatePrices());
+schedule.scheduleJob(everyDay, updatePrices);
