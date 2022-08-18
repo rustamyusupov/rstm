@@ -1,3 +1,7 @@
+@import 'button.css';
+@import 'form-control.css';
+@import 'icon.css';
+
 .wish {
   align-items: center;
   display: flex;
