@@ -14,7 +14,6 @@ block content
         id="name"
         value= item.name
         placeholder="Description"
-        tabindex="1"
         autofocus
         required
       )
@@ -25,10 +24,9 @@ block content
           id="link"
           value= item.link
           placeholder="Link"
-          tabindex="2"
           required
         )
-        +iconLink(item.link, 'open-in-new.svg', "Icon Open In New", true)(class="wish__icon-link")
+        +iconLink(item.link, 'open-in-new.svg', 16, 16, "Icon Open In New", true)(class="wish__icon-link")
       input.form-control.wish__field.wish__price(
         type="number"
         name="price"
@@ -37,13 +35,12 @@ block content
         step="any"
         value= item.price
         placeholder="Price"
-        tabindex="3"
         required
       )
-      select.form-control.wish__field.wish__currency(name="currency_id" id="currency" tabindex="4" required)
+      select.form-control.wish__field.wish__currency(name="currency_id" id="currency" required)
         each currency in currencies
           option(value=currency.id selected= currency.id === item.currency_id)= currency.name
-      select.form-control.wish__field.wish__category(name="category_id" id="category" tabindex="5" required)
+      select.form-control.wish__field.wish__category(name="category_id" id="category" required)
         each category in categories
           option(value=category.id selected= category.id === item.category_id)= category.name
       input.form-control.wish__field.wish__sort(
@@ -53,7 +50,6 @@ block content
         min="0"
         value= item.sort || 0
         placeholder="Sort"
-        tabindex="6"
       )
       div.wish__field.wish__container
         label.wish__archive
@@ -62,10 +58,9 @@ block content
             name="archive"
             id="archive"
             checked= item.archive
-            tabindex="7"
           )
           | Archive
       div.wish__action
-        button.button.button--outlined(type="submit" tabindex="8")= item.name ? "Save" : "Add"
+        button.button.button--outlined(type="submit")= item.name ? "Save" : "Add"
         if item.name
           button#delete.button.button--error(type="button") Delete
