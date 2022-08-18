@@ -5,8 +5,9 @@ const path = require('path');
 const session = require('./utils/session');
 const routes = require('./routes');
 
-const publicPath = path.join(__dirname, '..', '/public');
 const viewsPath = path.join(__dirname, '/views');
+const publicPath = path.join(__dirname, '..', '/public');
+const chartistPath = path.join(__dirname, '..', '/node_modules/node-chartist');
 
 const app = new express();
 
@@ -17,6 +18,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(publicPath));
+app.use('/chartist', express.static(chartistPath));
 app.use(session);
 app.use(routes);
 
