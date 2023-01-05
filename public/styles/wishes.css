@@ -80,6 +80,18 @@
   }
 }
 
+.wishes__item--draggable {
+  cursor: move;
+}
+
+.wishes__item--dragging {
+  opacity: 0.4;
+}
+
+.wishes__item--over {
+  border: 1px dotted var(--color-gray-dark);
+}
+
 .wishes__cog {
   background-color: unset;
   border: unset;

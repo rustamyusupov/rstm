@@ -20,7 +20,11 @@ block content
         h2.wishes__category-title= category.name
         ul.wishes__list
           each wish in category.wishes 
-            li.wishes__item(class={'wishes__item--archive': wish.archive})
+            li.wishes__item(
+              class={'wishes__item--archive': wish.archive, 'wishes__item--draggable': editable}
+              draggable=editable.toString()
+              id=wish.id
+            )
               if editable
                 +iconLink(
                   `/wishes/${wish.id}/edit`,
