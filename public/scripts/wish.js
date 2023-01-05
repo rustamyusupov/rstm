@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const button = document.querySelector('#delete');
 
-  button.addEventListener('click', () => {
+  const handleClick = () => {
     fetch(location.pathname, {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -13,5 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then(() => {
       window.location = '/wishes';
     });
-  });
+  };
+
+  button.addEventListener('click', handleClick);
 });

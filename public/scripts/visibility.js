@@ -1,4 +1,7 @@
-import { isTouch } from './isTouch.js';
+const isTouch = () =>
+  'ontouchstart' in window ||
+  navigator.maxTouchPoints > 0 ||
+  navigator.msMaxTouchPoints > 0;
 
 const toggleWishes = show => {
   const wishes = document.querySelectorAll('.wishes__item--archive');
