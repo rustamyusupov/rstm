@@ -31,6 +31,7 @@ const categoriseWishes = (categories, wishes, prices) =>
           diff: getDiff(rest.id, prices),
           ...rest,
         })),
+      id,
       ...rest,
     }))
     .filter(({ wishes }) => wishes?.length > 0);
