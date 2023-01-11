@@ -113,4 +113,10 @@ const remove = async (req, res) => {
   return res.status(200).json({});
 };
 
-module.exports = { index, item, chart, add, update, remove };
+const sort = async (req, res) => {
+  console.log(req.body);
+
+  return res.status(200).json({});
+};
+
+module.exports = { index, item, chart, add, update, remove, sort };

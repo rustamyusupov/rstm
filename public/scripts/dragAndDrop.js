@@ -22,28 +22,78 @@ export const initDragAndDrop = () => {
   const lists = document.querySelectorAll('.wishes__list');
   const wishes = document.querySelectorAll('.wishes__item');
 
-  wishes.forEach(wish => {
-    wish.addEventListener('dragstart', () => {
-      wish.classList.add('wishes__item--dragging');
-    });
+  const handleDragStart = e => {
+    if (!e.target.classList.contains('wishes__item')) {
+      return;
+    }
 
-    wish.addEventListener('dragend', () => {
-      wish.classList.remove('wishes__item--dragging');
+    e.target.classList.add('wishes__item--dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', e.target.id);
+  };
+
+  const handleDragEnd = e => {
+    e.target.classList.remove('wishes__item--dragging');
+
+    wishes.forEach(wish => {
+      wish.classList.remove('wishes__item--over');
     });
+  };
+
+  const handleDragEnter = e => {
+    if (
+      e.dataTransfer.effectAllowed !== 'move' ||
+      !e.target.classList.contains('wishes__item')
+    ) {
+      return;
+    }
+
+    e.target.classList.add('wishes__item--over');
+  };
+
+  const handleDragLeave = e => {
+    e.target.classList.remove('wishes__item--over');
+  };
+
+  wishes.forEach(wish => {
+    wish.addEventListener('dragstart', handleDragStart);
+    wish.addEventListener('dragend', handleDragEnd);
+    wish.addEventListener('dragenter', handleDragEnter);
+    wish.addEventListener('dragleave', handleDragLeave);
   });
 
-  lists.forEach(list => {
-    list.addEventListener('dragover', e => {
-      e.preventDefault();
+  const handleDragOver = list => e => {
+    e.preventDefault();
 
-      const afterElement = getDragAfterElement(list, e.clientY);
-      const wish = document.querySelector('.wishes__item--dragging');
+    const afterElement = getDragAfterElement(list, e.clientY);
+    const wish = document.querySelector('.wishes__item--dragging');
 
-      if (!afterElement) {
-        list.appendChild(wish);
-      } else {
-        list.insertBefore(wish, afterElement);
-      }
+    if (!afterElement) {
+      list.appendChild(wish);
+    } else {
+      list.insertBefore(wish, afterElement);
+    }
+  };
+
+  const handleDrop = list => e => {
+    e.stopPropagation();
+    const wish = e.dataTransfer.getData('text');
+    const afterElement = getDragAfterElement(list, e.clientY);
+
+    fetch(location.pathname, {
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      method: 'PATCH',
+      body: JSON.stringify({
+        wish,
+        after: afterElement?.id,
+        category: list?.id,
+      }),
     });
+  };
+
+  lists.forEach(list => {
+    list.addEventListener('dragover', handleDragOver(list));
+    list.addEventListener('drop', handleDrop(list));
   });
 };
