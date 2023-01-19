@@ -20,7 +20,7 @@ const getList = async isAuth => {
         LIMIT 1
       )
     ${isAuth ? '' : 'WHERE archive = false'}
-    ORDER BY W.sort DESC, W.name ASC
+    ORDER BY W.sort ASC, W.name ASC
   `;
   const result = await db.query(query);
 
@@ -76,6 +76,20 @@ const updateItem = async (id, data) => {
   return result.rows?.[0];
 };
 
+const sortItems = async (category, item, after) => {
+  const query = `
+    UPDATE wishes
+    SET sort = case when id = ${item.id} then ${after.sort - 1} else sort-1 end
+    WHERE sort >= ${item.sort} and sort < ${
+    after.sort
+  } and category_id = ${category}
+  `;
+  const result = await db.query(query);
+  console.log({ query, result });
+
+  return result.rows?.[0];
+};
+
 const deleteItem = async id => {
   const query = `
     DELETE 
@@ -87,4 +101,11 @@ const deleteItem = async id => {
   return result;
 };
 
-module.exports = { getList, getItem, addItem, updateItem, deleteItem };
+module.exports = {
+  getList,
+  getItem,
+  addItem,
+  updateItem,
+  sortItems,
+  deleteItem,
+};
