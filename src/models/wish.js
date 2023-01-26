@@ -76,16 +76,21 @@ const updateItem = async (id, data) => {
   return result.rows?.[0];
 };
 
-const sortItems = async (category, item, after) => {
+const sortItems = async (category, id, sort = null) => {
   const query = `
     UPDATE wishes
-    SET sort = case when id = ${item.id} then ${after.sort - 1} else sort-1 end
-    WHERE sort >= ${item.sort} and sort < ${
-    after.sort
-  } and category_id = ${category}
+    SET sort = CASE 
+      WHEN sort IS NULL THEN (
+        SELECT
+          MAX(sort)
+        FROM 
+          wishes
+      ) + 1
+      WHEN id = ${id} AND sort IS NOT NULL THEN ${sort - 1} ELSE sort - 1
+    END
+    WHERE (${sort} IS NULL or sort < ${sort}) OR id = ${id} AND category_id = ${category}
   `;
   const result = await db.query(query);
-  console.log({ query, result });
 
   return result.rows?.[0];
 };

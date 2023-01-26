@@ -106,6 +106,20 @@ const update = async (req, res) => {
   res.redirect('/wishes');
 };
 
+const sort = async (req, res) => {
+  const { id, after, category } = req.body;
+  const item = await wish.getItem(id);
+  const afterItem = after ? await wish.getItem(after) : null;
+
+  if (item.category_id !== Number(category)) {
+    await wish.updateItem(id, { category_id: category });
+  }
+
+  await wish.sortItems(category, id, afterItem?.sort);
+
+  return res.status(200).json({});
+};
+
 const remove = async (req, res) => {
   await price.deleteItem(req.params.id);
   await wish.deleteItem(req.params.id);
@@ -113,10 +127,4 @@ const remove = async (req, res) => {
   return res.status(200).json({});
 };
 
-const sort = async (req, res) => {
-  console.log(req.body);
-
-  return res.status(200).json({});
-};
-
-module.exports = { index, item, chart, add, update, remove, sort };
+module.exports = { index, item, chart, add, update, sort, remove };

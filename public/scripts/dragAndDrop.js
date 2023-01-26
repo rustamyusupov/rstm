@@ -77,7 +77,7 @@ export const initDragAndDrop = () => {
 
   const handleDrop = list => e => {
     e.stopPropagation();
-    const wish = e.dataTransfer.getData('text');
+    const id = e.dataTransfer.getData('text');
     const afterElement = getDragAfterElement(list, e.clientY);
 
     fetch(location.pathname, {
@@ -85,7 +85,7 @@ export const initDragAndDrop = () => {
       credentials: 'include',
       method: 'PATCH',
       body: JSON.stringify({
-        wish,
+        id,
         after: afterElement?.id,
         category: list?.id,
       }),
