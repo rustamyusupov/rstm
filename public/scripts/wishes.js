@@ -1,7 +1,7 @@
 import { initVisibility } from './visibility.js';
-import { initDragAndDrop } from './dragAndDrop.js';
+import { initDraggable } from './draggable.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initVisibility();
-  initDragAndDrop();
+  initDraggable();
 });
