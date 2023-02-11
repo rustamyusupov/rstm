@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const cheerio = require('cheerio');
 
 const wish = require('../models/wish');
@@ -6,12 +7,12 @@ const request = require('../utils/request');
 const { currencies } = require('../utils/constants');
 
 const selectors = {
-  'www.tradeinn.com': '#total_dinamic',
   'electronics.sony.com': 'div.custom-product-summary__price',
-  'veter.cc': 'div.product-details__product-price.ec-price-item > span',
+  'veter.cc':
+    'div.js-store-prod-price.t-store__prod-popup__price.t-store__prod-popup__price-item.t-name.t-name_md',
   'www.fizik.com': 'div.product-info-price #product-price-6098 > span.price',
-  'www.lecoffeeride.cc':
-    '#product-12255 > div.summary.entry-summary > p > span',
+  'www.lecoffeeride.cc': 'div.summary.entry-summary > p > span',
+  'www.tradeinn.com': '#total_dinamic',
 };
 
 const fetch = async wish => {

@@ -3,7 +3,7 @@ const decimalDigits = 2;
 const coinsInPrice = 100;
 
 const currencies = {
-  RUB: 'руб',
+  RUB: '₽',
   USD: '$',
   EUR: '€',
   GBP: '£',

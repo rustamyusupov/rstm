@@ -4,6 +4,7 @@ const price = require('../models/price');
 const wish = require('../models/wish');
 
 const { decimalDigits } = require('../utils/constants');
+const updatePrices = require('../utils/updatePrices');
 
 const formatter = currency =>
   new Intl.NumberFormat('ru-RU', {
