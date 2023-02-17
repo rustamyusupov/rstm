@@ -6,7 +6,7 @@ const wish = require('../models/wish');
 const { decimalDigits } = require('../utils/constants');
 
 const layout = {
-  margin: { t: 0, l: 40 },
+  margin: { t: 0, l: 40, r: 20 },
   showlegend: false,
 };
 
