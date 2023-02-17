@@ -6,11 +6,12 @@ const wish = require('../models/wish');
 const { decimalDigits } = require('../utils/constants');
 
 const layout = {
-  margin: { t: 0, r: 20, b: 20, l: 40 },
+  margin: { t: 0, l: 40 },
   showlegend: false,
 };
 
 const config = {
+  responsive: true,
   staticPlot: true,
 };
 
