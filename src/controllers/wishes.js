@@ -4,7 +4,21 @@ const price = require('../models/price');
 const wish = require('../models/wish');
 
 const { decimalDigits } = require('../utils/constants');
-const updatePrices = require('../utils/updatePrices');
+
+const layout = {
+  margin: { t: 0, r: 0, b: 0, l: 40 },
+  showlegend: false,
+};
+
+const config = {
+  staticPlot: true,
+};
+
+const trace = {
+  line: { width: 2 },
+  mode: 'lines+markers',
+  type: 'scatter',
+};
 
 const formatter = currency =>
   new Intl.NumberFormat('ru-RU', {
@@ -66,14 +80,30 @@ const item = async (req, res) => {
   });
 };
 
+const getData = prices => [
+  {
+    ...prices.reduce(
+      (acc, cur) => ({
+        ...acc,
+        x: [...acc.x, new Date(cur.created_at).toLocaleDateString('ru-RU')],
+        y: [...acc.y, cur.price / 100],
+      }),
+      { x: [], y: [] }
+    ),
+    trace,
+  },
+];
+
 const chart = async (req, res) => {
   const { id } = req.params;
   const prices = await price.getItem(id);
-  console.log(prices);
 
   res.render('chart', {
     title: 'Rustam | Chart',
     description: 'A little bit of my wish',
+    data: JSON.stringify(getData(prices)),
+    layout: JSON.stringify(layout),
+    config: JSON.stringify(config),
   });
 };
 

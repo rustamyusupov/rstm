@@ -2,8 +2,18 @@ extends blocks/page
 
 block head 
   link(rel="stylesheet" href="/styles/chart.css")
+  script(defer type="module" src="https://cdn.plot.ly/plotly-2.18.1.min.js")
 
 block content
   main
-    | !{chart}
+    <div id="chart" />
+    script.
+      document.body.onload = () => {
+        Plotly.newPlot(
+          'chart',
+          JSON.parse('!{data}'),
+          JSON.parse('!{layout}'),
+          JSON.parse('!{config}')
+        );
+      }
 
