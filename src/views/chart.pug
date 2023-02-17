@@ -6,8 +6,8 @@ block head
 
 block content
   main
-    h1.wish__title !{name}
-    <div id="chart" />
+    h1.chart__title !{name}
+    <div id="chart" class="chart" />
     script.
       document.body.onload = () => {
         Plotly.newPlot(

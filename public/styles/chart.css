@@ -1,8 +1,13 @@
-.wish__title {
+.chart__title {
   display: flex;
   font-size: 14px;
   font-weight: normal;
   justify-content: center;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.chart {
+  margin-right: -10px;
+  margin-left: -10px;
 }
