@@ -1,0 +1,8 @@
+.wish__title {
+  display: flex;
+  font-size: 14px;
+  font-weight: normal;
+  justify-content: center;
+  margin-bottom: 10px;
+  text-align: center;
+}

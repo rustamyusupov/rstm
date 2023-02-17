@@ -6,7 +6,7 @@ const wish = require('../models/wish');
 const { decimalDigits } = require('../utils/constants');
 
 const layout = {
-  margin: { t: 0, r: 0, b: 0, l: 40 },
+  margin: { t: 0, r: 20, b: 20, l: 40 },
   showlegend: false,
 };
 
@@ -51,6 +51,20 @@ const categoriseWishes = (categories, wishes, prices) =>
     }))
     .filter(({ wishes }) => wishes?.length > 0);
 
+const getData = prices => [
+  {
+    ...prices.reduce(
+      (acc, cur) => ({
+        ...acc,
+        x: [...acc.x, new Date(cur.created_at).toLocaleDateString('ru-RU')],
+        y: [...acc.y, cur.price / 100],
+      }),
+      { x: [], y: [] }
+    ),
+    trace,
+  },
+];
+
 const index = async (req, res) => {
   const isAuth = Boolean(req.session?.user?.id);
   const categories = await category.getList();
@@ -80,27 +94,15 @@ const item = async (req, res) => {
   });
 };
 
-const getData = prices => [
-  {
-    ...prices.reduce(
-      (acc, cur) => ({
-        ...acc,
-        x: [...acc.x, new Date(cur.created_at).toLocaleDateString('ru-RU')],
-        y: [...acc.y, cur.price / 100],
-      }),
-      { x: [], y: [] }
-    ),
-    trace,
-  },
-];
-
 const chart = async (req, res) => {
   const { id } = req.params;
   const prices = await price.getItem(id);
+  const { name } = await wish.getItem(id);
 
   res.render('chart', {
     title: 'Rustam | Chart',
     description: 'A little bit of my wish',
+    name,
     data: JSON.stringify(getData(prices)),
     layout: JSON.stringify(layout),
     config: JSON.stringify(config),
