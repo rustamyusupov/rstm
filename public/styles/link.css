@@ -1,9 +1,0 @@
-.link {
-  margin: 0px;
-  color: var(--color-blue);
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}

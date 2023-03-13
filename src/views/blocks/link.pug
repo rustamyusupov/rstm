@@ -1,7 +1,0 @@
-mixin link(href, name, external=true)
-  a.link(
-    class!=attributes.class
-    href=href
-    target=(external ? "_blank" : "")
-    rel=(external ? "nofollow noopener" : "")
-)= name
