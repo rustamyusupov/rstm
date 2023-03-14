@@ -1,0 +1,8 @@
+{
+  "name": "rstm",
+  "version": "2.0.0",
+  "author": "Rustam Yusupov",
+  "description": "Personal stuff about me",
+  "main": "index.js",
+  "scripts": {}
+}
