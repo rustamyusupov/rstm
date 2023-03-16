@@ -4,5 +4,8 @@
   "author": "Rustam Yusupov",
   "description": "Personal stuff about me",
   "main": "index.js",
-  "scripts": {}
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
 }
