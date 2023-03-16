@@ -2,7 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "noImplicitAny": true,
     "outDir": "dist",
     "skipLibCheck": true,
