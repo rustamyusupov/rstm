@@ -1,0 +1,51 @@
+extends page
+include link
+
+block head 
+  link(rel="stylesheet" href="/styles/main.css")
+
+block content
+  header.header
+    img.logo(src="/logo.webp" width="64px" height="64px" alt="Logo")
+    h1.title Hi, I&rsquo;m Rustam
+    p.subtitle Writing code brings me&nbsp;a&nbsp;sense of&nbsp;pleasure and satisfaction.
+  section.section
+    h2.about Here are a&nbsp;few things about&nbsp;me:
+    ul
+      li As&nbsp;a&nbsp;husband, father, engineer, and avid cyclist, I&nbsp;am 
+        | constantly balancing my&nbsp;various roles and responsibilities. My&nbsp;love for 
+        | cycling and engineering drive me&nbsp;to&nbsp;constantly improve and learn new things, 
+        | and my&nbsp;role as&nbsp;a&nbsp;husband and father keeps me&nbsp;grounded and motivated 
+        | to&nbsp;be&nbsp;the best version of&nbsp;myself. These different aspects 
+        | of&nbsp;my&nbsp;life all work together to&nbsp;shape who I&nbsp;am and what I&nbsp;do.
+      li Kaliningrad, Russia is&nbsp;my&nbsp;current place of&nbsp;residence.
+      li At 
+        +link('https://www.linkedin.com/company/s7-techlab', 'S7 Techlab')
+        |, I am employed as a senior frontend engineer, where I utilize my skills and expertise to develop and maintain the company's web applications and interfaces.
+  section.section
+    h2.about Some of&nbsp;my&nbsp;personal projects include:
+    ul
+      li
+        +link('https://github.com/rustamyusupov/rstm', 'rstm.me')
+        |  – my&nbsp;personal website that serves as&nbsp;a&nbsp;testing ground for trying out new technologies.
+      li
+        +link('https://github.com/rustamyusupov/trp', 'trp')
+        |  – a chrome extension that allows you to copy TrainerRoad workouts to TrainerPeaks.
+      li
+        +link('https://github.com/rustamyusupov/life-in-weeks', 'life-in-weeks')
+        |  – a&nbsp;tool that helps you visualize your 90-year life in&nbsp;weeks.
+      li
+        +link('https://github.com/rustamyusupov/sans', 'sans')
+        |  – a&nbsp;command line interface tool for setting your status in&nbsp;Slack, 
+        | and a&nbsp;similar tool called 
+        +link('https://github.com/rustamyusupov/tomato', 'tomato')
+        |  that was written in&nbsp;Elixir.
+  section.section
+    h2.about More things about&nbsp;me: 
+    ul
+      li
+        +link('https://github.com/rustamyusupov', 'GitHub')
+      li
+        +link('https://www.linkedin.com/in/rustamyusupov', 'LinkedIn')
+      li
+        +link('mailto:i@rstm.me', 'Email')

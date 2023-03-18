@@ -1,16 +1,18 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import path from 'path';
 
-const app: Express = express();
+import routes from './routes';
+
 const port: string = process.env.PORT || '3000';
-const publicPath: string = path.join(__dirname, '..', '/public');
+const app: Express = express();
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.json());
-app.use(express.static(publicPath));
+app.use(express.static(path.join(__dirname, '..', '/public')));
+app.use(routes);
 
-app.use('/', (_: Request, res: Response): void =>
-  res.sendFile(path.join(publicPath, 'index.html'))
-);
-app.use('*', (_: Request, res: Response): void => res.redirect('/'));
-
-app.listen(port, (): void => console.log(`App is running at http://localhost:${port}`));
+app.listen(port, (): void => {
+  console.log(`App is running at http://localhost:${port}`);
+});
